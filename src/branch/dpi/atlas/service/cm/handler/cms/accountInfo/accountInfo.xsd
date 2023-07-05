@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ACCOUNTINFO" type="ACCOUNTINFOType"/>
+    <xsd:complexType name="ACCOUNTINFOType">
+        <xsd:sequence>
+            <xsd:element name="RRN" type="rrnType"/>
+            <xsd:element name="ACCOUNT_NO" type="accountNoType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="rrnType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="accountNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="13"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

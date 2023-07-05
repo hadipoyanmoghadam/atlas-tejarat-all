@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BALANCE_RESPONSE" type="BALANCE_RESPONSEType"/>
+  <xsd:complexType name="BALANCE_RESPONSEType">
+    <xsd:sequence>
+        <xsd:element type="actionCodeType" name="ACTIONCODE"/>
+        <xsd:element type="descType" name="DESC"/>
+        <xsd:element type="rrnType" name="RRN"/>
+        <xsd:element type="balanceType" name="BALANCE"/>
+        <xsd:element type="accountNoType" name="ACCOUNT_NO"/>
+        <xsd:element type="accountGroupType" name="ACCOUNT_GROUP"/>
+        <xsd:element type="respDateTimeType" name="RESPDATETIME"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:simpleType name="actionCodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="4"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="descType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="30"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="rrnType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="balanceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="18"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="accountNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="13"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="accountGroupType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="respDateTimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="14"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

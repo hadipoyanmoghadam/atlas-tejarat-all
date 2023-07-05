@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="Atlas Channel" default="jar">
+	<path id="lib.class.path">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	<path id="run.class.path">
+		<pathelement path="classes"/>
+		<pathelement path="config"/>
+		<pathelement path="config/ojb"/>
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+<!--        <delete file="atlas-channel-tejarat.tar"/>-->
+    </target>
+	<target name="init" depends="clean" >
+		<mkdir dir="build/classes"/>
+		<mkdir dir="dist"/>
+	</target>
+	<target name="compile">
+		<javac srcdir="src" destdir="classes" classpathref="lib.class.path"/>
+		<copy todir="classes">
+			<fileset dir="src">
+				<include name="**/*.xml"/>
+			</fileset>
+			<fileset dir="src">
+				<include name="**/*.properties"/>
+			</fileset>
+            <fileset dir="src">
+                <include name="**/*.xsd"/>
+            </fileset>
+		</copy>
+	</target>
+	<target name="jar" depends="compile">
+	<!--<target name="jar" >-->
+		<jar destfile="dist/atlas-all-tejarat.jar" basedir="classes" />
+	</target>
+
+    <target name="ear" >
+        <ear destfile="dist/atlas-all-tejarat.ear" appxml="">
+            <fileset dir="classes"/>
+            <fileset dir="lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </ear>
+    </target>
+
+</project>

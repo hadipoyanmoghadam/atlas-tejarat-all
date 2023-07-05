@@ -1,0 +1,232 @@
+<!-- Definitions for dpi.atlas.model.entity.issuer.Issuer-->
+<class-descriptor
+    class="dpi.atlas.model.entity.issuer.Issuer"
+    table="TBIssuer"
+    >
+    <field-descriptor
+        name="IIN"
+        column="Issuer_Identification_Number"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="FIT_PIDDX"
+        column="FIT_PIDDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PFIID"
+        column="FIT_PFIID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PSTDX"
+        column="FIT_PSTDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PMXPN"
+        column="FIT_PMXPN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PRCNT"
+        column="FIT_PRCNT"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_PAGDX"
+        column="FIT_PINDX_PAGDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_PIDDX"
+        column="FIT_PINDX_PIDDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_PRCNT"
+        column="FIT_PINDX_PRCNT"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_PANDX"
+        column="FIT_PINDX_PANDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_PLNDX"
+        column="FIT_PINDX_PLNDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINDX_POFDX"
+        column="FIT_PINDX_POFDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="accountNo"
+        column="AccountNo"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.issuer.IssuerLinkedFIT-->
+<class-descriptor
+    class="dpi.atlas.model.entity.issuer.IssuerLinkedFIT"
+    table="TBIssuerLinkedFIT"
+    >
+    <field-descriptor
+        name="FIT_Number"
+        column="FIT_Number"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="IIN"
+        column="IIN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PAGDX"
+        column="FIT_PAGDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PCKLN"
+        column="FIT_PCKLN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PINFD"
+        column="FIT_PINFD"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PANDX"
+        column="FIT_PANDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PANLN"
+        column="FIT_PANLN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PANPD"
+        column="FIT_PANPD"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_POFDX"
+        column="FIT_POFDX"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="FIT_PLNDX"
+        column="FIT_PLNDX"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.issuer.IssuerBranch-->
+<class-descriptor
+    class="dpi.atlas.model.entity.issuer.IssuerBranch"
+    table="TBIssuerBranch"
+    >
+    <field-descriptor
+        name="IIN"
+        column="IIN"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="branchID"
+        column="Branch_ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="branchName"
+        column="Branch_Name"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="branchNameFarsi"
+        column="Branch_Name_Farsi"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="city"
+        column="City"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="address"
+        column="Address"
+        jdbc-type="VARCHAR"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.issuer.CurrentValues-->
+<class-descriptor
+    class="dpi.atlas.model.entity.issuer.CurrentValues"
+    table="TBCurrentValues"
+    >
+    <field-descriptor
+        name="itemKey"
+        column="ItemKey"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="itemValue"
+        column="ItemValue"
+        jdbc-type="VARCHAR"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.common.City-->
+<class-descriptor
+    class="dpi.atlas.model.entity.common.City"
+    table="TBCity"
+    >
+    <field-descriptor
+        name="ID"
+        column="ID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="description"
+        column="Description"
+        jdbc-type="VARCHAR"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>

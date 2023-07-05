@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<!DOCTYPE qsp-config SYSTEM "server-config.dtd">
+
+<qsp-config>
+    <logger name="atlas">
+        <log-listener class="org.jpos.util.Log4JListener">
+            <property name="priority" value="WARN"/>
+        </log-listener>
+    </logger>
+
+
+    <service name="AtlasModelService" class="dpi.atlas.service.model.AtlasModelService" logger="atlas" realm="AtlasModelService"
+        mbean-name="ATLAS:name=AtlasModelService">
+        <property name="config-file" value="atlas-model-tj.xml"/>
+    </service>
+
+    <service name="ConfigurationService" class="dpi.atlas.service.cfg.ConfigurationService" logger="atlas" realm="ConfigurationService"
+        mbean-name="ATLAS:name=ConfigurationService">
+        <property name="atlas-id" value="11111111111"/>
+        <property name="atlas-mode" value="ATLAS-CM"/>
+        <property name="atlas-domain" value="ATLAS-CM"/>
+    </service>
+
+    <service name="ChannelManagerService" class="dpi.atlas.service.cm.ChannelManagerService" logger="atlas" realm="ChannelManagerService"
+        mbean-name="ATLAS:name=ChannelManagerService">
+        <property name="config-file" value="cm-service-tj-cfs-activemq.xml"/>
+        <property name="thread-pool" value="server-pool"/>
+    </service>
+
+<!--
+    <quartz-job name="CutOver" class="dpi.atlas.service.cfs.job.CutOver"
+                cron-expression="0 37 * * * ?">
+                -->
+<!--cron-expression="0 0 20 * * ?">-->
+<!--
+        <property name="file-path" value="/tmp/SGBTrans"/>
+        <property name="file-path" value="e:\\Works\\CFSserver\\SGBTrans"/>
+    </quartz-job>
+-->
+
+<!--
+    <quartz-job name="SGBFileApplier" class="dpi.atlas.service.cfs.job.SGBFileApplier"
+                cron-expression="0 34 * * * ?">
+                -->
+<!--cron-expression="0 30 0/2 * * ?">-->
+<!--
+    </quartz-job>
+-->
+
+    <!--
+    <quartz-job name="SGB-File-Reader" class="dpi.atlas.service.cfs.job.SGBFileReader"
+                cron-expression="0 0 * * * ?">
+        <property name="file-path" value="E:\\Works\\DRS Transactions LOGs\\SGB File 860307\\SGB28FU1"/>
+-->
+<!--        <property name="file-path" value="E:\\Backed_Up\\Works\\DRS Transactions LOGs\\New_CD\\840808\\SGBBalanceTrans-13840808-225030"/>-->
+<!--
+    </quartz-job>
+-->
+
+<!--
+    <task name="NamingService" class="org.jpos.apps.qsp.task.Naming"
+        logger="atlas" realm="Naming-Service">
+        <property name="port" value="1098"/>
+    </task>
+-->
+
+<!--
+    <task name="RMIAdaptor" class="org.jpos.apps.qsp.task.RMIAdaptor"
+        logger="atlas" realm="RMI-Adaptor">
+        <property name="jndi-name" value="jrmp"/>
+    </task>
+-->
+
+    <task name="HttpAdaptor" class="org.jpos.apps.qsp.task.HttpAdaptor"
+        logger="atlas" realm="Http-Adaptor">
+        <property name="port" value="8096"/>
+        <!--<property name="host" value="localhost" />-->
+        <property name="user" value="atlas"/>
+        <property name="password" value="atlas"/>
+        <property name="processor" value="mx4j.tools.adaptor.http.XSLTProcessor"/>
+    </task>
+
+    <mbean name="ATLAS:type=service,name=ServerInfo" class="org.jpos.apps.qsp.server.ServerInfo"
+        logger="atlas" realm="ServerInfo">
+    </mbean>
+
+
+    <thread-pool name="server-pool" logger="atlas" realm="thread-pool"
+        max-size="500"/>
+<!-- Ahmadi comented to run with lesser memory usage in 85-11-24     max-size="5000"/>-->
+
+    <thread-pool name="listener-pool" logger="atlas" realm="thread-pool"
+        max-size="2000"/>
+<!-- Ahmadi comented to run with lesser memory usage in 85-11-24       max-size="5000"/>-->
+
+</qsp-config>

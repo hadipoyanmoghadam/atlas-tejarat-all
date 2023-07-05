@@ -1,0 +1,18 @@
+# JCS Basic Config, just a simple memory only cache
+
+jcs.default=
+jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+
+jcs.system.groupIdCache=
+jcs.system.groupIdCache.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.system.groupIdCache.cacheattributes.MaxObjects=10000
+jcs.system.groupIdCache.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+
+# region used by the ObjectCacheJCSImpl
+jcs.region.ojbDefault=
+jcs.region.ojbDefault.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.ojbDefault.cacheattributes.MaxObjects=1000
+jcs.region.ojbDefault.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+

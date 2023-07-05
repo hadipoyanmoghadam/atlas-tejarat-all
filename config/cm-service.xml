@@ -1,0 +1,1836 @@
+<?xml version="1.0" ?>
+<!-- <!DOCTYPE financial-service SYSTEM "cm-service.dtd"> -->
+<cm-service>
+
+    <global-handlers>
+        <cm-handler id="logger-in" class="dpi.atlas.service.cm.handler.general.CMLogger">
+            <property name="direction" value="incoming"/>
+        </cm-handler>
+
+        <cm-handler id="logger-out" class="dpi.atlas.service.cm.handler.general.CMLogger">
+            <property name="direction" value="outgoing"/>
+        </cm-handler>
+
+        <cm-handler id="ivr-logger-in" class="dpi.atlas.service.cm.handler.general.CMCOMLogger">
+            <property name="direction" value="incoming"/>
+        </cm-handler>
+
+        <cm-handler id="ivr-logger-out" class="dpi.atlas.service.cm.handler.general.CMCOMLogger">
+            <property name="direction" value="outgoing"/>
+        </cm-handler>
+    </global-handlers>
+
+
+    <cm-source name="cm-monitor-http"
+        type="http" class="dpi.atlas.service.cm.source.http.HTTPSource" enable="false">
+        <property name="port" value="8090"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.monitor.StatusDetailServlet"/>
+        <property name="context-path" value="/statusDetail"/>
+    </cm-source>
+
+    <cm-source name="cm-log-monitor-http"
+        type="http" class="dpi.atlas.service.cm.source.http.HTTPSource" enable="false">
+        <property name="port" value="8013"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.monitor.ChannelLogServlet"/>
+        <property name="context-path" value="/log"/>
+    </cm-source>
+
+    <cm-source name="ivr-receive-socket" type="ivr" class="dpi.atlas.service.cm.source.ivr.SocketSource" enable="true">
+        <property name="port" value="9900"/>
+        <property name="thread-pool" value="server-pool"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.common.GetMessageFields"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerFinderByAccountNo"/>
+        <cm-handler ref-id="ivr-logger-in"/>
+
+
+
+        <!--        <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>-->
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'LGIN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">
+                            <property name="description" value="Check IVR service validity"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">
+                            <property name="period" value="3600"/>
+                            <property name="tryCount" value="3"/>
+                            <property name="description" value="Check pin try count for IVR service"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.LoginHandler">
+                            <property name="description" value="Check user validity for IVR service"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' ) OR ( command == 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'PCG' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">
+                            <property name="description" value="Check IVR service validity"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">
+                            <property name="period" value="3600"/>
+                            <property name="description" value="Pin Try Count for IVR service"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinChangeHandler">
+                            <property name="description" value="Pin change for IVR service"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'PAY' ) OR ( command == 'ACCT' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.DummyHandler"/>
+                    </case>
+
+                    <!--
+                        <case>
+                            <condition expression=" ( command == 'PAY' )"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.common.bill.GetUtilityBranchlHandler"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.common.bill.UtilityBillFormatHandler"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.common.bill.CheckDublicatePaymentHandler"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                                <property name="host-agent" value="host-agent1"/>
+                                <property name="host-interface" value="host1"/>
+                            </cm-handler>
+                            <cm-handler class="dpi.atlas.service.cm.handler.common.bill.SetPaymentListHandler"/>
+                        </case>
+                        <case>
+                            <condition expression=" ( command == 'ACCT' )"/>
+                            <cm-handler class="dpi.atlas.service.cm.ivr.handlers.AccountCityHandler"/>
+                        </case>
+    -->
+                    <case>
+                        <condition expression=" ( command == 'ACFX' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.contact.SendCustomeContactHandler"/>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression="  ( (command == 'STM')  AND (destType =='online'))" description="Send online fax "/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.fax.OnlineFaxFormatter">
+                            <property name="from-fax" value="8709559"/>
+                            <property name="message" value="resources"/>
+                            <property name="description" value="Send online fax "/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression="  ( (command == 'STM')  AND (destType !='online'))" description="Send offline fax/mail "/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.contact.GetCustomerDefaultStatementAddress">
+                            <property name="description" value="Get customer default statement address "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.fax.OfflineStatementSender">
+                            <property name="from-email" value="admin@linux.is.dpi.net.ir"/>
+                            <property name="from-fax" value="8709559"/>
+                            <property name="subject" value="Statement from Post Bank"/>
+                            <property name="body" value="statement"/>
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="Send Statement "/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression="  ( (command == 'STM')  AND ( (destType=='newFax') OR (destType=='defFax') ))" description="Send Statemen through fax "/>
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.SocketLoopBackSender"/>-->
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="faxgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression="  ( (command == 'STM')  AND (destType=='defMail'))" description="Send Statemen through default email address"/>
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.SocketLoopBackSender"/>-->
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="mailgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.ivr.SocketLoopBackSender"/>
+        <cm-handler ref-id="ivr-logger-out"/>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.general.InternalFaultHandler">
+            <property name="connector" value="channel-internal-errors"/>
+            <property name="external-connector" value="http-loopback-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.external.account" class="dpi.atlas.service.cm.handler.common.fault.AccountFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+        <fault-handler name="fault.external.customer" class="dpi.atlas.service.cm.handler.common.fault.CustomerFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+        <fault-handler name="fault.external.service" class="dpi.atlas.service.cm.handler.common.fault.ServicelFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+        <fault-handler name="fault.external.organizationbranch" class="dpi.atlas.service.cm.handler.common.fault.OrganizationBranchFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.external.record.duplicate" class="dpi.atlas.service.cm.handler.common.fault.DuplicateRecordFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+
+
+    </cm-source>
+
+    <cm-source name="ib-receive-http" type="http"
+        class="dpi.atlas.service.cm.source.http.HTTPSource"
+        enable="false">
+        <property name="port" value="8000"/>
+        <property name="max-threads" value="1000"/>
+        <property name="min-threads" value="500"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.ib.IBServlet"/>
+        <property name="ssl-mode" value="false"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+        <property name="priority" value="9"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.common.GetMessageFields"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'LGIN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.LoginHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'BLNC' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.BalanceHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'ACLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.AccountListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'MNST' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.MiniStatementHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'PNCG' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinChangeHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'ACST' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.AccountStatementHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CANN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ChangeAccountNicknameHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CDST' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CardStatementHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'OGLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.OrganizationListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'OBLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.OrganizationBranchListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'DFBL' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.DefineBillHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'BLLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.BillListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'SCPB' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.SchedulePayBillHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'PYBL' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.bill.PayBillHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CRLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CurrencyListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CBRQ' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ChequeBookRequestHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CQLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ChequeListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CQIF' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ChequeInfoHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'AWLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.AccountWhiteListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CTIF' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CustomerInfoHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'TFFN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.FundTransferHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STFN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ScheduleFundTransferHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'SVLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ServiceListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'LGLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.LanguageListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CDLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CardListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'DLSV' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.DeleteServiceHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CNLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CountryListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'LCLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.LocaleListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.StyleListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'RPLC' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ReportLostCardHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'UPPR' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.UpdatePreferencesHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'ACIF' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.AccountInfoHandler"/>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command == 'TFLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.TransferListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'PYLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.PaymentListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'SPLS' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.ScheduledPaymentListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'RGSV' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.RegisterServiceHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'UPSV' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.UpdateServiceHandler"/>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command == 'CMPL' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CMParamListHandler"/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'CMSL' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.ib.handlers.CMSParamListHandler"/>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.general.HTTPLoopBackSender"/>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.general.InternalFaultHandler">
+            <property name="connector" value="channel-internal-errors"/>
+            <property name="external-connector" value="http-loopback-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.general.ExternalFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+    </cm-source>
+
+    <cm-source name="wap-receive-http" type="http"
+        class="dpi.atlas.service.cm.source.http.HTTPSource"
+        enable="false">
+        <property name="port" value="8091"/>
+        <property name="max-threads" value="1000"/>
+        <property name="min-threads" value="500"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.source.http.general.WAPServlet"/>
+        <property name="ssl-mode" value="false"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+
+
+        <cm-handler ref-id="logger-in"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>
+        <!--        <cm-handler class="dpi.atlas.service.cm.handler.sms.CustomerFinder"/>-->
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'LGIN' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">
+                            <property name="description" value="Check IVR service validity"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">
+                            <property name="period" value="3600"/>
+                            <property name="tryCount" value="3"/>
+                            <property name="description" value="Check pin try count for IVR service"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.LoginHandler">
+                            <property name="description" value="Check user validity for IVR service"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' ) OR ( command == 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                            <property name="host-agent" value="host-agent1"/>
+                            <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+
+                <!--<switch>-->
+                <!--<case>-->
+                <!--<condition expression=" ( command == 'PINCHNG' )"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.dummy.DummyPINChangeHandler"/>-->
+                <!--</case>-->
+                <!--<case>-->
+                <!--<condition expression=" ( command != 'PINCHNG' )"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.general.GeneralAuthenticator"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">-->
+                <!--<cm-decision>-->
+                <!--<switch>-->
+                <!--<case>-->
+                <!--<condition expression=" ( command == 'BAL' )"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.general.host.GetBalance">-->
+                <!--<property name="host-agent" value="host-agent1"/>-->
+                <!--<property name="host-interface" value="host1"/>-->
+                <!--</cm-handler>-->
+                <!--</case>-->
+                <!--<case>-->
+                <!--<condition expression=" ( command == 'MSTM' )"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.general.host.GetMiniStatement">-->
+                <!--<property name="host-agent" value="host-agent1"/>-->
+                <!--<property name="host-interface" value="host1"/>-->
+                <!--</cm-handler>-->
+                <!--</case>-->
+                <!--<case>-->
+                <!--<condition expression=" ( command == 'ACL' )"/>-->
+                <!--<cm-handler class="dpi.atlas.service.cm.handler.general.host.GetAccountsList">-->
+                <!--<property name="host-agent" value="host-agent1"/>-->
+                <!--<property name="host-interface" value="host1"/>-->
+                <!--</cm-handler>-->
+                <!--</case>-->
+                <!--</switch>-->
+                <!--</cm-decision>-->
+                <!--</cm-handler>-->
+                <!--</case>-->
+                <!--</switch>-->
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler ref-id="logger-out"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.general.HTTPLoopBackSender"/>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.general.InternalFaultHandler">
+            <property name="connector" value="channel-internal-errors"/>
+            <property name="external-connector" value="http-loopback-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.general.ExternalFaultHandler">
+            <property name="connector" value="http-loopback-connector"/>
+        </fault-handler>
+    </cm-source>
+
+    <cm-source name="new-sms-receive-http" type="http" class="dpi.atlas.service.cm.source.http.HTTPSource" enable="false">
+        <property name="port" value="1515"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.source.http.sms.SMSServlet"/>
+        <property name="ssl-mode" value="true"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+            <property name="connector" value="sms-to-channel-jms-connector"/>
+        </cm-handler>
+    </cm-source>
+
+    <cm-source name="sms-receive-jms1" type="http" class="dpi.atlas.service.cm.source.jms.JMSSource"
+        enable="false">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="sms2channel"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSSMSListener"/>
+
+
+        <cm-handler ref-id="logger-in"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSHelpHandler"/>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.CustomerFinder"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSAuthenticator"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.AccountFinder"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetBalance">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'MSTM' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetMiniStatement">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'ACL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetAccountsList">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+
+                                    <!--<case id="srh-3-0-4">
+                                    <condition name="command" value="DEF" operator="EQ"/>
+
+                                    <cm-handler name="sms-receive-jms-3-0-4-1" class="dpi.atlas.service.cm.handler.sms.host.DefineNickName">
+                                    <property name="host-interface" value="host1"/>
+                                    </cm-handler>
+                                    </case>-->
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+        </cm-handler>
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="http-loopback-connector"/>-->
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+    </cm-source>
+
+    <cm-source name="sms-receive-http" type="http" class="dpi.atlas.service.cm.source.http.HTTPSource" enable="true">
+        <property name="port" value="1517"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.source.http.sms.SMSServlet"/>
+        <property name="ssl-mode" value="false"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.common.GetMessageFields"/>
+
+        <cm-handler ref-id="logger-in"/>
+
+        <!--
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerStatusHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.PinTryCountHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServerLicenceHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>
+        -->
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'HLP' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSHelpHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Help Handler "/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerFinderByMobileNo"/>
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="description" value="Check SMS service validity"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="period" value="3600"/>-->
+                        <!--                            <property name="description" value="Check pin try count for SMS service"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSAuthenticator"/>-->
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">
+                            <property name="description" value="Check SMS service validity"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.LoginHandler">
+                            <property name="description" value="Check user validity for SMS service"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' )  OR ( command == 'STM' ) OR ( command == 'DEF' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountFinder"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountChecker"/>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' )  OR ( command == 'STM' ) OR ( command == 'ACL' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( command == 'DEF' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.NickNameDefiner"/>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( command == 'PIN' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinChangeHandler"/>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command != 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSResponseHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Response Handler "/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="sms-http-connector"/>
+                            <!--                            <property name="connector" value="http-loopback-connector"/>-->
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.fax.OfflineStatementSender">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="Send Statement "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( destType == 'FAX' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="fax-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( destType == 'MAIL' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="mail-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <!--
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+        <property name="connector" value="channel-to-sms-jms-connector"/>
+        </cm-handler>
+        -->
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <!--            <property name="connector" value="channel-to-sms-jms-connector"/>-->
+            <!--                        <property name="connector" value="http-loopback-connector"/>-->
+            <property name="connector" value="sms-http-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <!--            <property name="connector" value="channel-to-sms-jms-connector"/>-->
+            <property name="connector" value="sms-http-connector"/>
+        </fault-handler>
+
+    </cm-source>
+
+
+    <cm-source name="sms-receive-jms" type="http" class="dpi.atlas.service.cm.source.jms.JMSSource"
+        enable="false">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="sms2channel"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSSMSListener"/>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.common.GetMessageFields"/>
+        <cm-handler ref-id="logger-in"/>
+
+        <!--
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerStatusHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.PinTryCountHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServerLicenceHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>
+        -->
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'HLP' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSHelpHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Help Handler "/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerFinderByMobileNo"/>
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="description" value="Check SMS service validity"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="period" value="3600"/>-->
+                        <!--                            <property name="description" value="Check pin try count for SMS service"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSAuthenticator"/>-->
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' )  OR ( command == 'STM' ) OR ( command == 'DEF' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountFinder"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountChecker"/>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' )  OR ( command == 'STM' ) OR ( command == 'ACL' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( command == 'DEF' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.NickNameDefiner"/>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command != 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSResponseHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Response Handler "/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="http-loopback-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.fax.OfflineStatementSender">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="Send Statement "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( destType == 'FAX' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="fax-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( destType == 'MAIL' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="mail-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <!--
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+        <property name="connector" value="channel-to-sms-jms-connector"/>
+        </cm-handler>
+        -->
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="http-loopback-connector"/>-->
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+    </cm-source>
+
+
+    <cm-source name="sms-receive-http-old" type="http" class="dpi.atlas.service.cm.source.http.HTTPSource"
+        enable="false">
+        <property name="port" value="1518"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.source.http.sms.SMSServlet"/>
+        <property name="ssl-mode" value="false"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.common.GetMessageFields"/>
+        <cm-handler ref-id="logger-in"/>
+
+        <!--
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerStatusHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.PinTryCountHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServerLicenceHandler"/>
+                <cm-handler class="dpi.atlas.service.cm.handler.common.server.ServerAuthenticator"/>
+        -->
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'HLP' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSHelpHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Help Handler "/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerFinderByMobileNo"/>
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.service.ServiceValidityHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="description" value="Check SMS service validity"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.common.pin.PinTryCountHandler">-->
+                        <!--                            <property name="service-type" value="SMS"/>-->
+                        <!--                            <property name="period" value="3600"/>-->
+                        <!--                            <property name="description" value="Check pin try count for SMS service"/>-->
+                        <!--                        </cm-handler>-->
+                        <!--                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSAuthenticator"/>-->
+
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' ) OR ( command == 'MSTM' )  OR ( command == 'STM' )"/>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountFinder">
+                                            <property name="description" value="Find Customer Account No. "/>
+                                        </cm-handler>
+
+                                        <!--                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.AccountFinder"/>-->
+                                        <!--                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetBalance">-->
+                                        <!--                                            <property name="host-agent" value="host-agent1"/>-->
+                                        <!--                                            <property name="host-interface" value="host1"/>-->
+                                        <!--                                        </cm-handler>-->
+                                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                            <property name="description" value="Post request to bank host."/>
+                                        </cm-handler>
+                                    </case>
+                                    <!--
+
+                                                                        <case>
+                                                                            <condition expression=" ( command == 'MSTM' )"/>
+                                                                            <cm-handler class="dpi.atlas.service.cm.handler.common.CustomerAccountFinder"/>
+
+                                                                            <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetMiniStatement">
+                                                                                <property name="host-agent" value="host-agent1"/>
+                                                                                <property name="host-interface" value="host1"/>
+                                                                            </cm-handler>
+                                                                        </case>
+                                    -->
+                                    <case>
+                                        <condition expression=" ( command == 'ACL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.host.HostPostHandler">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                            <property name="description" value="Post request to bank host."/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( command == 'DEF' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.NickNameDefiner">
+                                            <property name="description" value="Define nickname for account."/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command != 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSResponseHandler">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="SMS Response Handler "/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="http-loopback-connector"/>
+                            <!--                            <property name="connector" value="channel-to-sms-jms-connector"/>-->
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STM' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.fax.OfflineStatementSender">
+                            <property name="language" value="en"/>
+                            <property name="country" value="US"/>
+                            <property name="message" value="CM_Msg"/>
+                            <property name="description" value="Send Statement "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( destType == 'FAX' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="faxgateway-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( destType != 'MAIL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="mailgateway-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <!--
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+        <property name="connector" value="channel-to-sms-jms-connector"/>
+        </cm-handler>
+        -->
+
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="http-loopback-connector"/>-->
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="channel-to-sms-jms-connector"/>
+            <!--            <property name="connector" value="sms-http-connector"/>-->
+        </fault-handler>
+    </cm-source>
+
+    <!--
+        <cm-source name="sparrow-receive" type="ivr" class="dpi.atlas.service.cm.source.sparrow.SparrowSource" enable="false">
+            <property name="port" value="9060"/>
+            <property name="thread-pool" value="server-pool"/>
+
+            <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                <cm-decision>
+                    <switch>
+                        <case>
+                            <condition expression=" ( state == 'NO_STATE' )"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.NullResponder"/>
+                        </case>
+                        <case>
+                            <condition expression=" ( state == 'TX_PROCESSING' )"/>
+                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.SparrowLogger">
+                                <property name="direction" value="1"/>
+                            </cm-handler>
+
+                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CheckTxExist"/>
+
+                            <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                                <cm-decision>
+                                    <switch>
+
+                                        <case>
+                                            <condition expression="(exist=='1') AND (forcePost=='0')"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ChangeLogStatus">
+                                                <property name="logStatus" value="2"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CreateResultSet">
+                                                <property name="action_code" value="9999"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMResultSetLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToEMFHandler"/>
+                                        </case>
+
+                                        <case>
+                                            <condition expression="(exist=='1') AND (forcePost=='1')"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ChangeLogStatus">
+                                                <property name="logStatus" value="2"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CreateResultSet">
+                                                <property name="action_code" value="0000"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMResultSetLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToEMFHandler"/>
+                                        </case>
+
+                                        <case>
+                                            <condition expression="(origExist=='0') AND ((forcePost=='1') OR (forcePost=='3')) AND ((messageType=='0') OR (messageType=='7') OR (messageType=='8'))"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToIMFHandler">
+                                                <property name="convert_to_orig" value="1"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CustomerFinder"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMCommandLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.general.SendMessage">
+                                                <property name="connector" value="cfs-activemq-connector"/>
+                                            </cm-handler>
+                                        </case>
+
+                                        <case>
+                                            <condition expression="(forcePost=='0') AND ((messageType=='5') OR (messageType=='6'))"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToIMFHandler"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CustomerFinder"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMCommandLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.JMSHostHandler">
+                                                <property name="url" value="tcp://localhost:61616"/>
+                                                <property name="user" value="defaultUser"/>
+                                                <property name="pwd" value="defaultPassword"/>
+                                                <property name="send_subject" value="CM2CFS_ONLINE"/>
+                                                <property name="receive_subject" value="CFS2CM_ONLINE"/>
+                                                <property name="timeout" value="5000"/>
+                                                <property name="priority" value="9"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMResultSetLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToEMFHandler"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ChangeLogStatus">
+                                                <property name="logStatus" value="1"/>
+                                            </cm-handler>
+                                        </case>
+
+                                        <case>
+                                            <condition expression="(forcePost=='1') OR (forcePost=='3') OR (forcePost=='5') OR ((forcePost=='2') AND (origExist=='1'))"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToIMFHandler"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CustomerFinder"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMCommandLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.general.SendMessage">
+                                                <property name="connector" value="cfs-activemq-connector"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CreateResultSet">
+                                                <property name="action_code" value="0000"/>
+                                            </cm-handler>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.CMResultSetLogger"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ToEMFHandler"/>
+
+                                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.ChangeLogStatus">
+                                                <property name="logStatus" value="1"/>
+                                            </cm-handler>
+                                        </case>
+
+                                    </switch>
+                                </cm-decision>
+                            </cm-handler>
+
+
+                            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.SparrowLogger">
+                                <property name="direction" value="2"/>
+                            </cm-handler>
+
+                        </case>
+                    </switch>
+                </cm-decision>
+            </cm-handler>
+
+            <cm-handler class="dpi.atlas.service.cm.handler.sparrow.SparrowLoopBackSender"/>
+
+            <fault-handler name="fault.external.spw" class="dpi.atlas.service.cm.handler.sparrow.ExternalFaultHandler">
+                <property name="connector" value="sparrow-loopback-connector"/>
+            </fault-handler>
+
+            <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sparrow.ExternalFaultHandler">
+                <property name="connector" value="sparrow-loopback-connector"/>
+            </fault-handler>
+
+        </cm-source>
+       -->
+
+    <cm-source name="ivr-receive" type="ivr" class="dpi.atlas.service.cm.source.ivr.IVRSource" enable="false">
+        <property name="port" value="9000"/>
+        <property name="thread-pool" value="server-pool"/>
+
+        <cm-handler ref-id="logger-in"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'g' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.DummyResponder"/>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'g' )"/>
+
+                        <!--
+                        <cm-handler name="ivr-receive-2-1" class="dpi.atlas.service.cm.handler.ivr.host.HostProcessor">
+                        <property name="host-interface" value="host1"/>
+                        </cm-handler>
+                        -->
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'A' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_A">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'B' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_B">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'C' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_C">
+                                            <property name="host-interface" value="host1"/>
+                                            <property name="host-agent" value="host-agent1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'D' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_D">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'E' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_E">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( command == 'F' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_F">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'O' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.ivr.host.Command_O">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+        <cm-handler ref-id="logger-out"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.ivr.IVRLoopBackSender"/>
+
+    </cm-source>
+
+
+    <cm-source name="mail-receive-jms" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource" enable="false">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="mail2channel"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSCMMailListener"/>
+
+        <cm-handler ref-id="logger-in"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'HLP' )"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSHelpHandler"/>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( command != 'HLP' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.CustomerFinder"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.sms.SMSAuthenticator"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( command == 'BAL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.AccountFinder"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetBalance">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'MSTM' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetMiniStatement">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'ACL' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetAccountsList">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'DEF' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.NickNameDefiner"/>
+                                    </case>
+
+                                    <case>
+                                        <condition expression=" ( command == 'STM' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.sms.host.GetStatement">
+                                            <property name="host-agent" value="host-agent1"/>
+                                            <property name="host-interface" value="host1"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML">
+                                            <property name="email" value="atlas@linux.is.dpi.net.ir"/>
+                                            <!--                                            <property name="email" value="atlas@dpi2.dpi.net.ir"/>-->
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command != 'STM' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="mailgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'STM' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( destination_type == 'FAX' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="faxgateway-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( destination_type != 'FAX' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                                            <property name="connector" value="mailgateway-jms-connector"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <!--
+        <cm-handler name="mail-receive-jms-2" class="dpi.atlas.service.cm.handler.general.OutConnector">
+        <property name="connector" value="mail-jms-connector"/>
+        </cm-handler>
+        -->
+
+        <fault-handler name="fault.external.auth" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="mailgateway-jms-connector"/>
+        </fault-handler>
+        <fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="mailgateway-jms-connector"/>
+        </fault-handler>
+
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.sms.FaultHandler">
+            <property name="connector" value="mailgateway-jms-connector"/>
+        </fault-handler>
+    </cm-source>
+
+    <!--
+    <cm-source name="mail-receive" type="mail" class="dpi.atlas.service.cm.source.mail.MailSource">
+    <property name="server-ip" value="172.16.203.120"/>
+    <property name="pop3-user" value="atlas"/>
+    <property name="pop3-pass" value="ats418"/>
+    <property name="mail-protocol" value="pop3"/>
+    <property name="scan-interval" value="30000"/>
+    <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+    <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+    <property name="queue-name" value="mail2channel"/>
+    <property name="connection-factory" value="JmsQueueConnectionFactory"/>
+    </cm-source>
+    -->
+
+    <cm-source name="mail-send-jms-1" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource"
+        enable="false">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="channel2mailgateway"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSMailListener"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.transform.XML2PDFTransformer"/>
+        <!--        <cm-handler class="dpi.atlas.service.cm.handler.transform.PDF2PSTransformer"/>-->
+        <cm-handler class="dpi.atlas.service.cm.handler.mail.MailSender">
+            <property name="mail.smtp.host" value="172.16.202.13"/>
+            <property name="user" value="admin"/>
+            <property name="password" value="123456"/>
+        </cm-handler>
+
+    </cm-source>
+
+    <!--
+    <cm-source name="mail-send-jms-2" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource"
+    enable="false">
+    <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+    <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+    <property name="receive-queue" value="channel2mail"/>
+    <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+    <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSMailListener"/>
+
+    <cm-handler class="dpi.atlas.service.cm.handler.mail.MailSender">
+    <property name="mail.smtp.host" value="172.16.203.120"/>
+    </cm-handler>
+
+    </cm-source>
+    -->
+
+    <cm-source name="fax-send-jms" type="jms"
+        class="dpi.atlas.service.cm.source.jms.JMSSource"
+        enable="false">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="channel2faxgateway"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSMailListener"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.transform.XML2PDFTransformer"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.transform.PDF2PSTransformer"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.fax.FAXSender"/>
+
+    </cm-source>
+
+    <!--
+    <cm-source name="jms-trace" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource">
+    <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+    <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+    <property name="receive-queue" value="channel2sms"/>
+    <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+    <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSGeneralListener"/>
+    </cm-source>
+    -->
+
+    <cm-source name="sms-send-jms" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource"
+        enable="true">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+        <property name="receive-queue" value="channel2sms"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSSMSListener"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+            <property name="connector" value="sms-http-connector"/>
+        </cm-handler>
+
+    </cm-source>
+
+    <cm-source name="globus-file-receive" type="file" class="dpi.atlas.service.cm.source.globus.file.GlobusFileSource" enable="false">
+        <property name="scan-dir" value="..\globus\CM.PUSH\"/>
+        <property name="scan-interval" value="2500"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.globus.GetTransactionInfo">
+            <property name="host-agent" value="host-agent1"/>
+            <property name="host-interface" value="host1"/>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML">
+            <property name="email" value="admin@mail.postbank.com"/>
+            <!--            <property name="email" value="atlas@dpi2.dpi.net.ir"/>-->
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( destination_type == 'EMAIL' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="mailgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( destination_type == 'FAX' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="faxgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+    </cm-source>
+
+
+    <cm-source name="globus-ftp-push-receive" type="ftp"
+        class="dpi.atlas.service.cm.source.globus.ftp.GlobusFTPSource"
+        enable="false">
+        <property name="ftp-server" value="192.168.7.205"/>
+        <property name="ftp-port" value="21"/>
+        <property name="uid" value="dev"/>
+        <property name="pwd" value="temenos"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="scan-interval" value="2500"/>
+        <property name="fetch-size" value="2"/>
+        <property name="file-delete" value="true"/>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.globus.GetTransactionInfo">
+            <property name="host-agent" value="host-agent1"/>
+            <property name="host-interface" value="host1"/>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.transform.Statement2XML">
+            <property name="email" value="admin@mail.postbank.com"/>
+            <!--            <property name="email" value="atlas@dpi2.dpi.net.ir"/>-->
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( destination_type == 'EMAIL' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="mailgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" ( destination_type == 'FAX' )"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.OutConnector">
+                            <property name="connector" value="faxgateway-jms-connector"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+
+    </cm-source>
+
+    <connectors>
+
+        <connector name="sms-http-connector" class="dpi.atlas.service.cm.connector.http.HTTPConnector">
+            <property name="host" value="192.168.13.26"/>
+            <property name="port" value="13013"/>
+            <property name="url-path" value="/cgi-bin/sendsms"/>
+            <property name="user" value="smsuser"/>
+            <property name="pass" value="123"/>
+        </connector>
+
+        <connector name="cfs-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSTextConnector">
+            <property name="initial-context-factory" value="org.codehaus.activemq.jndi.ActiveMQInitialContextFactory"/>
+            <property name="mq-provider-url" value="vm://localhost"/>
+            <property name="send-queue" value="CM2CFS_OFFLINE"/>
+            <property name="connection-factory-name" value="ConnectionFactory"/>
+            <property name="JMSType" value="2"/>
+        </connector>
+
+        <!--
+                <connector name="cfs-activemq-connector" class="dpi.atlas.service.cm.connector.jms.ActiveMQConnector">
+                    <property name="url" value="tcp://localhost:61616"/>
+                    <property name="user" value="defaultUser"/>
+                    <property name="pwd" value="defaultPassword"/>
+                    <property name="subject" value="CM2CFS_OFFLINE"/>
+                    <property name="priority" value="4"/>
+                    <property name="JMSType" value="2"/>
+                </connector>
+        -->
+
+        <connector name="mail-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+            <property name="send-queue" value="channel2mail"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="fax-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+            <property name="send-queue" value="channel2fax"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="mailgateway-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+            <property name="send-queue" value="channel2mailgateway"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="faxgateway-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://172.16.202.13:1099/"/>
+            <property name="send-queue" value="channel2faxgateway"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="channel-to-sms-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+            <property name="send-queue" value="channel2sms"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="channel-internal-errors" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+            <property name="send-queue" value="channel-internal-errors"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="sms-to-channel-jms-connector" class="dpi.atlas.service.cm.connector.jms.JMSConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://127.0.0.1:1099/"/>
+            <property name="send-queue" value="sms2channel"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="http-loopback-connector" class="dpi.atlas.service.cm.connector.http.HTTPLoopBackConnector"/>
+
+        <connector name="sparrow-loopback-connector" class="dpi.atlas.service.cm.handler.sparrow.SparrowLoopBackSender"/>
+
+        <connector name="cis-error-file-connector" class="dpi.atlas.service.cm.connector.file.FileConnector">
+            <property name="file" value="D:\1.txt"/>
+        </connector>
+
+    </connectors>
+
+    <host-agent name="host-agent1" class="dpi.atlas.service.cm.host.HostAgentGeneral">
+        <property name="host-interface-online" value="host1"/>
+        <property name="host-interface-batch" value="host1"/>
+    </host-agent>
+
+
+    <host-interface name="host1" class="dpi.atlas.service.cm.host.globus.HostInterfaceGlobus">
+        <property name="globus-connector" value="globus-connector5"/>
+        <property name="globus-username" value="CMADMINS001"/>
+        <property name="globus-password" value="qwerty"/>
+    </host-interface>
+
+    <host-interface name="host2" class="dpi.atlas.service.cm.host.nab.HostInterfaceNAB">
+        <property name="ip" value="172.16.209.227"/>
+        <property name="port" value="3020"/>
+        <property name="dispatcher-name" value="ATPS"/>
+        <property name="cm-branch-no" value="1800"/>
+        <property name="nab-username" value="1800"/>
+        <property name="nab-password" value="1800"/>
+    </host-interface>
+
+    <globus-connector name="globus-connector1" class="dpi.atlas.service.cm.connector.globus.GlobusLocalConnector">
+        <property name="globus-base-dir" value="D:\dpiwork\atlas-cm\globus\"/>
+        <property name="globus-fax-dir" value="CM.OFS.FAX.1"/>
+        <property name="globus-mail-dir" value="CM.OFS.MAIL.1"/>
+    </globus-connector>
+    <globus-connector name="globus-connector2" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.205"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="bon"/>
+        <property name="pwd" value="temenos"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="3000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+    <globus-connector name="globus-connector3" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.43"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="bon"/>
+        <property name="pwd" value="bon"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="1000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+    <globus-connector name="globus-connector4" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.175"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="test"/>
+        <property name="pwd" value="temenos"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="3000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+    <globus-connector name="globus-connector5" class="dpi.atlas.service.cm.connector.globus.GlobusTCConnector">
+        <property name="channel-name" value="ATMLIVEREQUESTS"/>
+    </globus-connector>
+
+</cm-service>

@@ -1,0 +1,1659 @@
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 8] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 5] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 6] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 7] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 4] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 2] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 3] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 4] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'INTR2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 7] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'SMS2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 6] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'IVR2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 5] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'FWS2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 8] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'WEB2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 3] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'IB2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/04/2013 15:38:45 [Jmqi AsyncConsume Thread. tid: 2] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'CFS2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2161' ('MQRC_Q_MGR_QUIESCING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/06/2013 14:04:15 [Jmqi AsyncConsume Thread. tid: 2] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2162' ('MQRC_Q_MGR_STOPPING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/06/2013 14:04:15 [Jmqi AsyncConsume Thread. tid: 3] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2162' ('MQRC_Q_MGR_STOPPING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:117)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/06/2013 14:04:15 [Jmqi AsyncConsume Thread. tid: 2] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'CFS2CM_ONLINE'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2162' ('MQRC_Q_MGR_STOPPING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/06/2013 14:04:15 [Jmqi AsyncConsume Thread. tid: 3] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ2002: Failed to get a message from destination 'FARA2CM'. WebSphere MQ classes for JMS attempted to perform an MQGET; however WebSphere MQ reported an error. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2162' ('MQRC_Q_MGR_STOPPING').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:123)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:463)
+                               : com.ibm.mq.jmqi.local.LocalHconn.jmqiConsumerMethod(LocalHconn.java:879)
+                               : com.ibm.mq.jmqi.local.LocalHobj.jmqiConsumerMethod(LocalHobj.java:286)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+11/12/2013 17:03:06:[PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getConnection(RemoteHconn.java:641)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getMaximumMessageLength(RemoteHconn.java:2073)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5345)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9213: A communications error for 'TCP' occurred. [1=java.net.SocketException[Software caused connection abort: recv failed],4=TCP,5=sockInStream.read]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1359)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: recv failed
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketInputStream.socketRead0(SocketInputStream.java:-2)
+                               : java.net.SocketInputStream.read(SocketInputStream.java:129)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1355)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+25/02/2014 12:06:16 [PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:178)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:178)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getConnection(RemoteHconn.java:641)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getMaximumMessageLength(RemoteHconn.java:2073)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5345)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:36)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:178)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9213: A communications error for 'TCP' occurred. [1=java.net.SocketException[Software caused connection abort: recv failed],4=TCP,5=sockInStream.read]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1359)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: recv failed
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketInputStream.socketRead0(SocketInputStream.java:-2)
+                               : java.net.SocketInputStream.read(SocketInputStream.java:129)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1355)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+18/08/2014 13:33:56 [PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:78)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:163)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:262)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchListener.process(BranchListener.java:52)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchServer$MessageSession.run(BranchServer.java:426)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:78)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:163)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:262)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchListener.process(BranchListener.java:52)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchServer$MessageSession.run(BranchServer.java:426)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.receiveAsyncTsh(RemoteHconn.java:1739)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.receiveTSH(RemoteHconn.java:1037)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.receiveMQIFlow(RemoteHconn.java:1522)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5446)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:78)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:163)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:262)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchListener.process(BranchListener.java:52)
+                               : branch.dpi.atlas.service.cm.source.branch.BranchServer$MessageSession.run(BranchServer.java:426)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9213: A communications error for 'TCP' occurred. [1=java.net.SocketException[Software caused connection abort: recv failed],4=TCP,5=sockInStream.read]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1359)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: recv failed
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketInputStream.socketRead0(SocketInputStream.java:-2)
+                               : java.net.SocketInputStream.read(SocketInputStream.java:147)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1355)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+06/11/2022 09:39:27 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2059' ('MQRC_Q_MGR_NOT_AVAILABLE').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2059;AMQ9503: Channel negotiation failed. [3=SEPAMSRV]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.analyseErrorSegment(RemoteConnection.java:4230)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.receiveTSH(RemoteConnection.java:2810)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.initSess(RemoteConnection.java:1329)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.connect(RemoteConnection.java:991)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnectionPool.getConnection(RemoteConnectionPool.java:293)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiConnect(RemoteFAP.java:1371)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:287)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+17/12/2022 11:37:36 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2059' ('MQRC_Q_MGR_NOT_AVAILABLE').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2059;AMQ9503: Channel negotiation failed. [3=SEPAMSRV]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.analyseErrorSegment(RemoteConnection.java:4230)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.receiveTSH(RemoteConnection.java:2810)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.initSess(RemoteConnection.java:1329)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.connect(RemoteConnection.java:991)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnectionPool.getConnection(RemoteConnectionPool.java:293)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiConnect(RemoteFAP.java:1371)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:287)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+24/12/2022 15:41:35 [PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cm.handler.general.SendTextResponse.doProcess(SendTextResponse.java:39)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:171)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cm.handler.general.SendTextResponse.doProcess(SendTextResponse.java:39)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:171)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getConnection(RemoteHconn.java:641)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getMaximumMessageLength(RemoteHconn.java:2073)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5345)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cm.handler.general.SendTextResponse.doProcess(SendTextResponse.java:39)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:171)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9206: Error sending data to host '/127.0.0.1:1414 (view-localhost)'. [1=java.net.SocketException[Software caused connection abort: socket write error],3=/127.0.0.1:1414 (view-localhost),4=TCP,5=OutputStream.write]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1270)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: socket write error
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketOutputStream.socketWrite0(SocketOutputStream.java:-2)
+                               : java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:92)
+                               : java.net.SocketOutputStream.write(SocketOutputStream.java:136)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1212)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+24/12/2022 15:41:37 [PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:26)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:26)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getConnection(RemoteHconn.java:641)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getMaximumMessageLength(RemoteHconn.java:2073)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5345)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendAsyncText(ResponseMQConnector.java:105)
+                               : dpi.atlas.service.cfs.handler.fault.CFSFaultHandler.doProcess(CFSFaultHandler.java:51)
+                               : dpi.atlas.service.cfs.handler.CFSHandlerBase.process(CFSHandlerBase.java:26)
+                               : dpi.atlas.service.cm.source.jms.JMSCFSListenerNew$Session.run(JMSCFSListenerNew.java:183)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9206: Error sending data to host '/127.0.0.1:1414 (view-localhost)'. [1=java.net.SocketException[Software caused connection abort: socket write error],3=/127.0.0.1:1414 (view-localhost),4=TCP,5=OutputStream.write]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1270)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: socket write error
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketOutputStream.socketWrite0(SocketOutputStream.java:-2)
+                               : java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:92)
+                               : java.net.SocketOutputStream.write(SocketOutputStream.java:136)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1212)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+25/12/2022 15:09:50 [PooledThread-2-running] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:599)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:162)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:153)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsListener.process(CreditsListener.java:50)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsServer$MessageSession.run(CreditsServer.java:425)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:993)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.checkJmqiCallSuccess(WMQMessageProducer.java:956)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.access$800(WMQMessageProducer.java:59)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:757)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:162)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:153)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsListener.process(CreditsListener.java:50)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsServer$MessageSession.run(CreditsServer.java:425)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getConnection(RemoteHconn.java:641)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteHconn.getMaximumMessageLength(RemoteHconn.java:2073)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5345)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiPut(RemoteFAP.java:5221)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$SpiIdentifiedProducerShadow.sendInternal(WMQMessageProducer.java:754)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer$ProducerShadow.send(WMQMessageProducer.java:508)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageProducer.send(WMQMessageProducer.java:1108)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.sendMessage(JmsMessageProducerImpl.java:872)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send_(JmsMessageProducerImpl.java:727)
+                               : com.ibm.msg.client.jms.internal.JmsMessageProducerImpl.send(JmsMessageProducerImpl.java:372)
+                               : com.ibm.mq.jms.MQMessageProducer.send(MQMessageProducer.java:310)
+                               : dpi.atlas.util.mq.mypool.MQSession.send(MQSession.java:77)
+                               : dpi.atlas.util.mq.mypool.MQSession.sendAndReceive(MQSession.java:162)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.sendSyncText(ResponseMQConnector.java:153)
+                               : dpi.atlas.service.cm.handler.general.OutSyncConnector.doProcess(OutSyncConnector.java:37)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.CMDecision.process(CMDecision.java:35)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : dpi.atlas.service.cm.handler.SimpleChain.doProcess(SimpleChain.java:33)
+                               : dpi.atlas.service.cm.handler.CMHandlerBase.process(CMHandlerBase.java:66)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsListener.process(CreditsListener.java:50)
+                               : branch.dpi.atlas.service.cm.source.branch.CreditsServer$MessageSession.run(CreditsServer.java:425)
+                               : org.jpos.util.ThreadPool$PooledThread.run(ThreadPool.java:100)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9206: Error sending data to host '/127.0.0.1:1414 (view-localhost)'. [1=java.net.SocketException[Software caused connection abort: socket write error],3=/127.0.0.1:1414 (view-localhost),4=TCP,5=OutputStream.write]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1270)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+     Caused by [4] --> Message : java.net.SocketException: Software caused connection abort: socket write error
+                         Class : class java.net.SocketException
+                         Stack : java.net.SocketOutputStream.socketWrite0(SocketOutputStream.java:-2)
+                               : java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:92)
+                               : java.net.SocketOutputStream.write(SocketOutputStream.java:136)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.send(RemoteTCPConnection.java:1212)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendTSH(RemoteConnection.java:2454)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.sendHeartbeat(RemoteConnection.java:3158)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteTCPConnection.receive(RemoteTCPConnection.java:1379)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveBuffer(RemoteRcvThread.java:617)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.receiveOneTSH(RemoteRcvThread.java:580)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteRcvThread.run(RemoteRcvThread.java:139)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:209)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:100)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:224)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:296)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1190)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+28/01/2023 15:07:15 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2059' ('MQRC_Q_MGR_NOT_AVAILABLE').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2059;AMQ9503: Channel negotiation failed. [3=SEPAMSRV]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.analyseErrorSegment(RemoteConnection.java:4230)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.receiveTSH(RemoteConnection.java:2810)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.initSess(RemoteConnection.java:1329)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.connect(RemoteConnection.java:991)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnectionPool.getConnection(RemoteConnectionPool.java:293)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiConnect(RemoteFAP.java:1371)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:287)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/02/2023 10:36:44 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2059' ('MQRC_Q_MGR_NOT_AVAILABLE').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2059;AMQ9503: Channel negotiation failed. [3=SEPAMSRV]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.analyseErrorSegment(RemoteConnection.java:4230)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.receiveTSH(RemoteConnection.java:2810)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.initSess(RemoteConnection.java:1329)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.connect(RemoteConnection.java:991)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnectionPool.getConnection(RemoteConnectionPool.java:293)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiConnect(RemoteFAP.java:1371)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:287)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/02/2023 14:56:10 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedIllegalStateException: JMSWMQ1107: A problem with this connection has occurred. This exception has been delivered due to an exception listener being registered on this onnection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedIllegalStateException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:489)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:219)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2059' ('MQRC_Q_MGR_NOT_AVAILABLE').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:206)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:319)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2059;AMQ9503: Channel negotiation failed. [3=SEPAMSRV]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.analyseErrorSegment(RemoteConnection.java:4230)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.receiveTSH(RemoteConnection.java:2810)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.initSess(RemoteConnection.java:1329)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnection.connect(RemoteConnection.java:991)
+                               : com.ibm.mq.jmqi.remote.internal.system.RemoteConnectionPool.getConnection(RemoteConnectionPool.java:293)
+                               : com.ibm.mq.jmqi.remote.internal.RemoteFAP.jmqiConnect(RemoteFAP.java:1371)
+                               : com.ibm.msg.client.wmq.internal.WMQSession.<init>(WMQSession.java:287)
+                               : com.ibm.msg.client.wmq.internal.WMQConnection.createSession(WMQConnection.java:844)
+                               : com.ibm.msg.client.jms.internal.JmsConnectionImpl.createSession(JmsConnectionImpl.java:533)
+                               : com.ibm.msg.client.jms.internal.JmsQueueConnectionImpl.createQueueSession(JmsQueueConnectionImpl.java:143)
+                               : com.ibm.mq.jms.MQQueueConnection.createQueueSession(MQQueueConnection.java:136)
+                               : dpi.atlas.util.mq.mypool.MQSession.<init>(MQSession.java:57)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.start(MQSessionPool.java:87)
+                               : dpi.atlas.util.mq.mypool.MQSessionPool.<init>(MQSessionPool.java:29)
+                               : dpi.atlas.service.cm.connector.jms.ResponseMQConnector.setConfiguration(ResponseMQConnector.java:278)
+                               : dpi.atlas.service.cm.config.ConfigConnector.config(ConfigConnector.java:38)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:58)
+                               : dpi.atlas.config.BaseConfiguration.configure(BaseConfiguration.java:65)
+                               : dpi.atlas.config.BaseConfiguration.loadConfoguration(BaseConfiguration.java:73)
+                               : dpi.atlas.service.cm.ChannelManagerService.initService(ChannelManagerService.java:83)
+                               : dpi.atlas.service.AtlasServiceSupport.init(AtlasServiceSupport.java:44)
+                               : org.jpos.apps.qsp.config.ConfigService.config(ConfigService.java:113)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:280)
+                               : org.jpos.apps.qsp.QSP.configure(QSP.java:299)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:441)
+                               : org.jpos.apps.qsp.QSP.launch(QSP.java:500)
+                               : org.jpos.apps.qsp.QSP.main(QSP.java:508)
+                               : QSPServer.main(QSPServer.java:45)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+                               : sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+                               : sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+                               : java.lang.reflect.Method.invoke(Method.java:597)
+                               : com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------

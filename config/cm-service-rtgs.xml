@@ -1,0 +1,216 @@
+<?xml version="1.0" ?>
+<!-- <!DOCTYPE financial-service SYSTEM "cm-service.dtd"> -->
+<cm-service>
+
+    <!-- added by sina -->
+
+    <cm-source name="rtgs-cbi-message-listener" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="receive-queue" value="cbi-to-cm"/>
+        <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.rtgs.source.JmsRtgsMsgListener"/>
+
+        <!--        <cm-handler ref-id="logger-in"/>-->
+        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.RTGSMessageLoger">
+            <property name="direction" value="incoming"/>
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.GetMessageFields"/>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'MQ999' ) "/>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.DummyRTGSHandler"/>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.CbiConnector">
+                            <property name="connector" value="cbiConnector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'MQ202' ) "/>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.SetCM2CBIAccounts">
+                            <property name="RTGS-id" value="RTGS"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.FundTransferHandler">
+                            <property name="host-agent" value="globus-host-agent"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <!--        Todo: add new Fault Handler-->
+        <!--
+                <fault-handler name="fault.external.invalid.msg" class="dpi.atlas.service.cm.handler.sms.fault.FormatNotSupported">
+                    <property name="external-connector" value="http-loopback-connector"/>
+                </fault-handler>
+        -->
+
+
+    </cm-source>
+
+    <cm-source name="rtgs-receive-http" type="http" class="dpi.atlas.service.cm.source.http.HTTPSource"
+        desc="Receive Message from Bank Clients" enable="true">
+        <property name="port" value="1800"/>
+        <property name="servlet-class" value="dpi.atlas.service.cm.rtgs.source.RTGSServlet"/>
+        <property name="ssl-mode" value="false"/>
+        <property name="keystore-file" value="keystore"/>
+        <property name="password" value="password"/>
+        <property name="key-password" value="password"/>
+
+        <!--        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.GetMessageFields"/>-->
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( command == 'MQ103' ) "/>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'MQ202' ) "/>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.SetCBI2CMAccounts">
+                            <property name="RTGS-id" value="RTGS"/>
+                        </cm-handler>
+                        <!--                        <cm-handler class="test.rtgs.TestRTGSHandler"/>-->
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.FundTransferHandler">
+                            <property name="host-agent" value="globus-host-agent"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.MakeRTGSMQ202Message">
+                            <property name="sender" value="PSTBIRTHXXX"/>
+                            <property name="cbi_receiver" value="CBIBIRTHXXX"/>
+                            <property name="transaction-mode" value="T"/>
+                            <property name="bank" value="PSBK"/>
+                            <property name="bank_code" value="PSBK"/>
+                            <property name="country" value="IR"/>
+                            <property name="location" value="TH"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( command == 'MQ854' ) "/>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.RTGSMessageLoger">
+            <property name="direction" value="outgoing"/>
+        </cm-handler>
+        <cm-handler class="dpi.atlas.service.cm.rtgs.handler.CbiConnector">
+            <property name="connector" value="cm2cbi"/>
+        </cm-handler>
+
+
+    </cm-source>
+
+    <!-- to simulate CBI Queue, it should be ignored in live environment. -->
+    <cm-source name="cbi-queue" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource">
+        <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+        <property name="receive-queue" value="CBIQueue"/>
+        <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+        <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.CbiQueueListener"/>
+    </cm-source>
+
+    <!--
+        <cm-source name="cm-rtgs-to-cbi" type="jms" class="dpi.atlas.service.cm.source.jms.JMSSource">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="receive-queue" value="cm-to-cbi"/>
+            <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+            <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JmsRtgsMsgSender"/>
+
+            <cm-handler class="dpi.atlas.service.cm.rtgs.handler.CbiConnector">
+                <property name="cbiConnector" value="cbiConnector"/>
+            </cm-handler>
+        </cm-source>
+
+    -->
+    <connectors>
+        <connector name="cm2cbi" class="dpi.atlas.service.cm.connector.jms.JMSTextConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+            <property name="send-queue" value="cm-to-cbi"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+        <connector name="cbiConnector" class="dpi.atlas.service.cm.connector.jms.JMSTextConnector">
+            <property name="initial-context-factory" value="org.exolab.jms.jndi.rmi.RmiJndiInitialContextFactory"/>
+            <property name="mq-provider-url" value="rmi://localhost:1099/"/>
+            <property name="send-queue" value="CBIQueue"/>
+            <property name="connection-factory-name" value="JmsQueueConnectionFactory"/>
+        </connector>
+
+    </connectors>
+
+    <!-- end of added by sina -->
+
+    <host-agent name="globus-host-agent" class="dpi.atlas.service.cm.host.HostAgentChannel">
+        <property name="host-id" value="1"/>
+        <property name="host-interface-online" value="host-globus-online"/>
+    </host-agent>
+
+    <host-interface name="host-globus-online" class="dpi.atlas.service.cm.host.globus.HostInterfaceGlobus">
+        <property name="globus-connector" value="globus-connector1"/>
+        <!--        <property name="globus-connector" value="globus-connector5"/>-->
+        <property name="globus-username" value="CMADMINS001"/>
+        <property name="globus-password" value="qwerty"/>
+    </host-interface>
+
+
+    <globus-connector name="globus-connector1" class="dpi.atlas.service.cm.connector.globus.GlobusLocalConnector">
+        <property name="globus-base-dir" value="D:\dpiwork\atlas-cm\globus\"/>
+        <property name="globus-fax-dir" value="CM.OFS.FAX.1"/>
+        <property name="globus-mail-dir" value="CM.OFS.MAIL.1"/>
+    </globus-connector>
+
+    <globus-connector name="globus-connector2" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.205"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="bon"/>
+        <property name="pwd" value="temenos"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="3000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+    <globus-connector name="globus-connector3" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.43"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="bon"/>
+        <property name="pwd" value="bon"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="1000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+
+    <globus-connector name="globus-connector4" class="dpi.atlas.service.cm.connector.globus.GlobusFTPConnector">
+        <property name="ftp_server" value="192.168.7.175"/>
+        <property name="ftp_port" value="21"/>
+        <property name="uid" value="test"/>
+        <property name="pwd" value="temenos"/>
+        <property name="globus-in-dir" value="CM.IN"/>
+        <property name="globus-out-dir" value="CM.OUT"/>
+        <property name="globus-push-dir" value="CM.PUSH"/>
+        <property name="delay" value="2000"/>
+        <property name="timeout" value="6000"/>
+    </globus-connector>
+
+
+    <!--  <globus-connector name="globus-connector5-old" class="dpi.atlas.service.cm.connector.globus.GlobusTCConnector">
+          <property name="channel-name-live" value="ATMLIVEREQUESTS"  />
+          <property name="channel-name" value="ATMDEVREQUESTS"  />
+      </globus-connector>  -->
+
+    <globus-connector name="globus-connector5" class="dpi.atlas.service.cm.connector.globus.GlobusTCConnectorPool">
+        <property name="channel-name-live" value="ATMLIVEREQUESTS"/>
+        <property name="channel-name" value="ATMDEVREQUESTS"/>
+    </globus-connector>
+
+
+</cm-service>

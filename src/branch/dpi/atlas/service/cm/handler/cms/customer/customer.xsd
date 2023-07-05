@@ -1,0 +1,77 @@
+//todo 970928
+
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="CUSTOMER" type="CUSTOMERType"/>
+    <xsd:complexType name="CUSTOMERType">
+        <xsd:sequence>
+            <xsd:element type="recordFlagType" name="RECORD_FLAG"/>
+            <xsd:element type="rrnType" name="RRN"/>
+            <xsd:element type="accountNoType" name="ACCOUNT_NO"/>
+            <xsd:element type="accountGroupType" name="ACCOUNT_GROUP"/>
+            <xsd:element type="cardNoType" name="CARDNO"/>
+            <xsd:element type="rowType" name="ROW"/>
+            <xsd:element type="nameType" name="NAME_FAMILY_LATIN"/>
+            <xsd:element type="editDateType" name="EDIT_DATE"/>
+            <xsd:element type="cardType" name="CARD_TYPE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="recordFlagType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="2"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="rrnType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="accountNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="13"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="accountGroupType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="cardNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="16"/>
+            <xsd:maxLength value="19"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="rowType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="nameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="editDateType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="6"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="cardType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
+
+        
+        
+        
+        
+        
+        
+        
+        

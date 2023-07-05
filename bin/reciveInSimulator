@@ -1,0 +1,713 @@
+C:\j2sdk1.4.1_02\bin\java -Didea.launcher.port=7532 "-Didea.launcher.bin.path=C:\Program Files\JetBrains\IntelliJ IDEA 6.0\bin" -Dfile.encoding=UTF-8 -classpath "C:\j2sdk1.4.1_02\jre\lib\charsets.jar;C:\j2sdk1.4.1_02\jre\lib\jaws.jar;C:\j2sdk1.4.1_02\jre\lib\jce.jar;C:\j2sdk1.4.1_02\jre\lib\jsse.jar;C:\j2sdk1.4.1_02\jre\lib\rt.jar;C:\j2sdk1.4.1_02\jre\lib\sunrsasign.jar;C:\j2sdk1.4.1_02\jre\lib\ext\dnsns.jar;C:\j2sdk1.4.1_02\jre\lib\ext\ldapsec.jar;C:\j2sdk1.4.1_02\jre\lib\ext\localedata.jar;C:\j2sdk1.4.1_02\jre\lib\ext\sunjce_provider.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\classes;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\commons-logging.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\jndi.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\xerces_1_2_3.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\jdom.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\fscontext.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\postcard.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\jms.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\ldap.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\providerutil.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\com.ibm.mqbind.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\com.ibm.mq.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\com.ibm.mq.pcf-6.0.3.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\jta.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\jdbc;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\mqcontext.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\connector.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\com.ibm.mqjms.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\log4j-1.2.9.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\hitlicense.jar;D:\tejarat\TJ-CM-Jar-Client-multithread-simple\lib\hitjdbcdb2.jar;C:\Program Files\JetBrains\IntelliJ IDEA 6.0\lib\idea_rt.jar" com.intellij.rt.execution.application.AppMain dpi.atlas.simulator.SimulatorMain
+log4j_filename = null
+DEFAULT_CONFIGURATION_FILE = log4j.properties
+fileName is:Thread1.txt
+fileName is:Thread2.txt
+fileName is:Thread3.txt
+fileName is:Thread4.txt
+fileName is:Thread6.txt
+fileName is:Thread5.txt
+fileName is:Thread7.txt
+fileName is:Thread10.txt
+fileName is:Thread9.txt
+fileName is:Thread8.txt
+
+Request ==> Thread name is: Thread6 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[1]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[1]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.281
+Receive ==>> thraed name is: Thread6 == request_no  is: 1 == Response Time = 110
+ ******* totalResponseTime = 110 == totalReceiveCount = 1 == average = 110
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.312
+Receive ==>> thraed name is: Thread8 == request_no  is: 1 == Response Time = 141
+ ******* totalResponseTime = 251 == totalReceiveCount = 2 == average = 125
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.312
+Receive ==>> thraed name is: Thread4 == request_no  is: 1 == Response Time = 141
+ ******* totalResponseTime = 392 == totalReceiveCount = 3 == average = 130
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.312
+Receive ==>> thraed name is: Thread10 == request_no  is: 1 == Response Time = 141
+ ******* totalResponseTime = 533 == totalReceiveCount = 4 == average = 133
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.39
+Receive ==>> thraed name is: Thread2 == request_no  is: 1 == Response Time = 235
+ ******* totalResponseTime = 768 == totalReceiveCount = 5 == average = 153
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.515
+Receive ==>> thraed name is: Thread9 == request_no  is: 1 == Response Time = 328
+ ******* totalResponseTime = 1096 == totalReceiveCount = 6 == average = 182
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.546
+Receive ==>> thraed name is: Thread5 == request_no  is: 1 == Response Time = 359
+ ******* totalResponseTime = 1455 == totalReceiveCount = 7 == average = 207
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.562
+Receive ==>> thraed name is: Thread1 == request_no  is: 1 == Response Time = 391
+ ******* totalResponseTime = 1846 == totalReceiveCount = 8 == average = 230
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.609
+Receive ==>> thraed name is: Thread3 == request_no  is: 1 == Response Time = 406
+ ******* totalResponseTime = 2252 == totalReceiveCount = 9 == average = 250
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.609
+Receive ==>> thraed name is: Thread7 == request_no  is: 1 == Response Time = 437
+ ******* totalResponseTime = 2689 == totalReceiveCount = 10 == average = 268
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[2]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[2]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:20.89
+
+Request ==> Thread name is: Thread3 and Request count is Request[2]
+
+Receive ==>> thraed name is: Thread8 == request_no  is: 2 == Response Time = 172
+ ******* totalResponseTime = 2861 == totalReceiveCount = 11 == average = 260
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.0
+Receive ==>> thraed name is: Thread4 == request_no  is: 2 == Response Time = 312
+ ******* totalResponseTime = 3173 == totalReceiveCount = 12 == average = 264
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.046
+Receive ==>> thraed name is: Thread6 == request_no  is: 2 == Response Time = 375
+ ******* totalResponseTime = 3548 == totalReceiveCount = 13 == average = 272
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.14
+Receive ==>> thraed name is: Thread10 == request_no  is: 2 == Response Time = 375
+ ******* totalResponseTime = 3923 == totalReceiveCount = 14 == average = 280
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.218
+Receive ==>> thraed name is: Thread2 == request_no  is: 2 == Response Time = 453
+ ******* totalResponseTime = 4376 == totalReceiveCount = 15 == average = 291
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.25
+Receive ==>> thraed name is: Thread5 == request_no  is: 2 == Response Time = 422
+ ******* totalResponseTime = 4798 == totalReceiveCount = 16 == average = 299
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.296
+Receive ==>> thraed name is: Thread1 == request_no  is: 2 == Response Time = 453
+ ******* totalResponseTime = 5251 == totalReceiveCount = 17 == average = 308
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.312
+Receive ==>> thraed name is: Thread9 == request_no  is: 2 == Response Time = 469
+ ******* totalResponseTime = 5720 == totalReceiveCount = 18 == average = 317
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.406
+Receive ==>> thraed name is: Thread7 == request_no  is: 2 == Response Time = 516
+ ******* totalResponseTime = 6236 == totalReceiveCount = 19 == average = 328
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[3]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.531
+
+Request ==> Thread name is: Thread2 and Request count is Request[3]
+
+Receive ==>> thraed name is: Thread3 == request_no  is: 2 == Response Time = 656
+ ******* totalResponseTime = 6892 == totalReceiveCount = 20 == average = 344
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.546
+Receive ==>> thraed name is: Thread8 == request_no  is: 3 == Response Time = 250
+ ******* totalResponseTime = 7142 == totalReceiveCount = 21 == average = 340
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.546
+Receive ==>> thraed name is: Thread4 == request_no  is: 3 == Response Time = 266
+ ******* totalResponseTime = 7408 == totalReceiveCount = 22 == average = 336
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.671
+Receive ==>> thraed name is: Thread5 == request_no  is: 3 == Response Time = 250
+ ******* totalResponseTime = 7658 == totalReceiveCount = 23 == average = 332
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.718
+Receive ==>> thraed name is: Thread7 == request_no  is: 3 == Response Time = 328
+ ******* totalResponseTime = 7986 == totalReceiveCount = 24 == average = 332
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.921
+Receive ==>> thraed name is: Thread1 == request_no  is: 3 == Response Time = 468
+ ******* totalResponseTime = 8454 == totalReceiveCount = 25 == average = 338
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.921
+Receive ==>> thraed name is: Thread9 == request_no  is: 3 == Response Time = 468
+ ******* totalResponseTime = 8922 == totalReceiveCount = 26 == average = 343
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.921
+Receive ==>> thraed name is: Thread6 == request_no  is: 3 == Response Time = 469
+ ******* totalResponseTime = 9391 == totalReceiveCount = 27 == average = 347
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:21.953
+Receive ==>> thraed name is: Thread3 == request_no  is: 3 == Response Time = 438
+ ******* totalResponseTime = 9829 == totalReceiveCount = 28 == average = 351
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.031
+Receive ==>> thraed name is: Thread10 == request_no  is: 3 == Response Time = 515
+ ******* totalResponseTime = 10344 == totalReceiveCount = 29 == average = 356
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.046
+Receive ==>> thraed name is: Thread2 == request_no  is: 3 == Response Time = 500
+ ******* totalResponseTime = 10844 == totalReceiveCount = 30 == average = 361
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.046
+Receive ==>> thraed name is: Thread8 == request_no  is: 4 == Response Time = 140
+ ******* totalResponseTime = 10984 == totalReceiveCount = 31 == average = 354
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.14
+
+Request ==> Thread name is: Thread7 and Request count is Request[4]
+
+Receive ==>> thraed name is: Thread4 == request_no  is: 4 == Response Time = 234
+ ******* totalResponseTime = 11218 == totalReceiveCount = 32 == average = 350
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[4]
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.203
+Receive ==>> thraed name is: Thread5 == request_no  is: 4 == Response Time = 140
+ ******* totalResponseTime = 11358 == totalReceiveCount = 33 == average = 344
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.234
+Receive ==>> thraed name is: Thread7 == request_no  is: 4 == Response Time = 125
+ ******* totalResponseTime = 11483 == totalReceiveCount = 34 == average = 337
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.296
+Receive ==>> thraed name is: Thread1 == request_no  is: 4 == Response Time = 203
+ ******* totalResponseTime = 11686 == totalReceiveCount = 35 == average = 333
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.39
+Receive ==>> thraed name is: Thread9 == request_no  is: 4 == Response Time = 250
+ ******* totalResponseTime = 11936 == totalReceiveCount = 36 == average = 331
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.406
+Receive ==>> thraed name is: Thread3 == request_no  is: 4 == Response Time = 250
+ ******* totalResponseTime = 12186 == totalReceiveCount = 37 == average = 329
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[5]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.562
+Receive ==>> thraed name is: Thread6 == request_no  is: 4 == Response Time = 391
+ ******* totalResponseTime = 12577 == totalReceiveCount = 38 == average = 330
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[5]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.625
+Receive ==>> thraed name is: Thread10 == request_no  is: 4 == Response Time = 454
+ ******* totalResponseTime = 13031 == totalReceiveCount = 39 == average = 334
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.625
+Receive ==>> thraed name is: Thread2 == request_no  is: 4 == Response Time = 422
+ ******* totalResponseTime = 13453 == totalReceiveCount = 40 == average = 336
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[5]
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[5]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:22.984
+Receive ==>> thraed name is: Thread5 == request_no  is: 5 == Response Time = 359
+ ******* totalResponseTime = 13812 == totalReceiveCount = 41 == average = 336
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[6]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.156
+
+Request ==> Thread name is: Thread5 and Request count is Request[6]
+
+Receive ==>> thraed name is: Thread7 == request_no  is: 5 == Response Time = 469
+ ******* totalResponseTime = 14281 == totalReceiveCount = 42 == average = 340
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.218
+Receive ==>> thraed name is: Thread4 == request_no  is: 5 == Response Time = 750
+ ******* totalResponseTime = 15031 == totalReceiveCount = 43 == average = 349
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.265
+
+Request ==> Thread name is: Thread7 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[6]
+
+Receive ==>> thraed name is: Thread3 == request_no  is: 5 == Response Time = 500
+ ******* totalResponseTime = 15531 == totalReceiveCount = 44 == average = 352
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.296
+Receive ==>> thraed name is: Thread1 == request_no  is: 5 == Response Time = 593
+ ******* totalResponseTime = 16124 == totalReceiveCount = 45 == average = 358
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[6]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.437
+Receive ==>> thraed name is: Thread9 == request_no  is: 5 == Response Time = 687
+ ******* totalResponseTime = 16811 == totalReceiveCount = 46 == average = 365
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.5
+Receive ==>> thraed name is: Thread8 == request_no  is: 5 == Response Time = 1031
+ ******* totalResponseTime = 17842 == totalReceiveCount = 47 == average = 379
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[6]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.703
+Receive ==>> thraed name is: Thread2 == request_no  is: 5 == Response Time = 828
+ ******* totalResponseTime = 18670 == totalReceiveCount = 48 == average = 388
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.859
+
+Request ==> Thread name is: Thread5 and Request count is Request[7]
+
+
+Receive ==>> thraed name is: Thread6 == request_no  is: 5 == Response Time = 1047
+ ******* totalResponseTime = 19717 == totalReceiveCount = 49 == average = 402
+
+Request ==> Thread name is: Thread3 and Request count is Request[7]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[7]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.937
+Receive ==>> thraed name is: Thread4 == request_no  is: 6 == Response Time = 828
+ ******* totalResponseTime = 20545 == totalReceiveCount = 50 == average = 410
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.953
+Receive ==>> thraed name is: Thread8 == request_no  is: 6 == Response Time = 797
+ ******* totalResponseTime = 21342 == totalReceiveCount = 51 == average = 418
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.968
+Receive ==>> thraed name is: Thread10 == request_no  is: 5 == Response Time = 1156
+ ******* totalResponseTime = 22498 == totalReceiveCount = 52 == average = 432
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:23.984
+Receive ==>> thraed name is: Thread5 == request_no  is: 6 == Response Time = 828
+ ******* totalResponseTime = 23326 == totalReceiveCount = 53 == average = 440
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.078
+Receive ==>> thraed name is: Thread7 == request_no  is: 6 == Response Time = 797
+ ******* totalResponseTime = 24123 == totalReceiveCount = 54 == average = 446
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[7]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.14
+Receive ==>> thraed name is: Thread3 == request_no  is: 6 == Response Time = 859
+ ******* totalResponseTime = 24982 == totalReceiveCount = 55 == average = 454
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.203
+Receive ==>> thraed name is: Thread1 == request_no  is: 6 == Response Time = 891
+ ******* totalResponseTime = 25873 == totalReceiveCount = 56 == average = 462
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[7]
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.25
+Receive ==>> thraed name is: Thread9 == request_no  is: 6 == Response Time = 860
+ ******* totalResponseTime = 26733 == totalReceiveCount = 57 == average = 469
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.25
+Receive ==>> thraed name is: Thread10 == request_no  is: 6 == Response Time = 844
+ ******* totalResponseTime = 27577 == totalReceiveCount = 58 == average = 475
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[8]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.64
+Receive ==>> thraed name is: Thread2 == request_no  is: 6 == Response Time = 1015
+ ******* totalResponseTime = 28592 == totalReceiveCount = 59 == average = 484
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[8]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.75
+Receive ==>> thraed name is: Thread8 == request_no  is: 7 == Response Time = 1016
+ ******* totalResponseTime = 29608 == totalReceiveCount = 60 == average = 493
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[8]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.89
+Receive ==>> thraed name is: Thread5 == request_no  is: 7 == Response Time = 1031
+ ******* totalResponseTime = 30639 == totalReceiveCount = 61 == average = 502
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:24.937
+Receive ==>> thraed name is: Thread6 == request_no  is: 6 == Response Time = 1578
+ ******* totalResponseTime = 32217 == totalReceiveCount = 62 == average = 519
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[8]
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[9]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.187
+Receive ==>> thraed name is: Thread3 == request_no  is: 7 == Response Time = 1328
+ ******* totalResponseTime = 33545 == totalReceiveCount = 63 == average = 532
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[9]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.25
+Receive ==>> thraed name is: Thread4 == request_no  is: 7 == Response Time = 1625
+ ******* totalResponseTime = 35170 == totalReceiveCount = 64 == average = 549
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.265
+Receive ==>> thraed name is: Thread7 == request_no  is: 7 == Response Time = 1406
+ ******* totalResponseTime = 36576 == totalReceiveCount = 65 == average = 562
+
+
+Request ==> Thread name is: Thread9 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[9]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.406
+Receive ==>> thraed name is: Thread1 == request_no  is: 7 == Response Time = 1516
+ ******* totalResponseTime = 38092 == totalReceiveCount = 66 == average = 577
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.406
+Receive ==>> thraed name is: Thread9 == request_no  is: 7 == Response Time = 1343
+ ******* totalResponseTime = 39435 == totalReceiveCount = 67 == average = 588
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.437
+Receive ==>> thraed name is: Thread10 == request_no  is: 7 == Response Time = 1359
+ ******* totalResponseTime = 40794 == totalReceiveCount = 68 == average = 599
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.5
+Receive ==>> thraed name is: Thread6 == request_no  is: 7 == Response Time = 1297
+ ******* totalResponseTime = 42091 == totalReceiveCount = 69 == average = 610
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.531
+Receive ==>> thraed name is: Thread2 == request_no  is: 7 == Response Time = 1360
+ ******* totalResponseTime = 43451 == totalReceiveCount = 70 == average = 620
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[9]
+
+
+Request ==> Thread name is: Thread8 and Request count is Request[10]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.687
+Receive ==>> thraed name is: Thread4 == request_no  is: 8 == Response Time = 1266
+ ******* totalResponseTime = 44717 == totalReceiveCount = 71 == average = 629
+
+
+Request ==> Thread name is: Thread1 and Request count is Request[10]
+
+
+Request ==> Thread name is: Thread7 and Request count is Request[10]
+
+
+Request ==> Thread name is: Thread5 and Request count is Request[10]
+
+
+Request ==> Thread name is: Thread3 and Request count is Request[10]
+
+
+Request ==> Thread name is: Thread4 and Request count is Request[10]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.765
+
+Request ==> Thread name is: Thread9 and Request count is Request[10]
+
+Receive ==>> thraed name is: Thread8 == request_no  is: 8 == Response Time = 1344
+ ******* totalResponseTime = 46061 == totalReceiveCount = 72 == average = 639
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.843
+Receive ==>> thraed name is: Thread1 == request_no  is: 8 == Response Time = 1390
+ ******* totalResponseTime = 47451 == totalReceiveCount = 73 == average = 650
+
+
+Request ==> Thread name is: Thread10 and Request count is Request[10]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.843
+Receive ==>> thraed name is: Thread7 == request_no  is: 8 == Response Time = 1312
+ ******* totalResponseTime = 48763 == totalReceiveCount = 74 == average = 658
+
+
+Request ==> Thread name is: Thread6 and Request count is Request[10]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.921
+Receive ==>> thraed name is: Thread3 == request_no  is: 8 == Response Time = 1375
+ ******* totalResponseTime = 50138 == totalReceiveCount = 75 == average = 668
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:25.953
+Receive ==>> thraed name is: Thread9 == request_no  is: 8 == Response Time = 1250
+ ******* totalResponseTime = 51388 == totalReceiveCount = 76 == average = 676
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.187
+Receive ==>> thraed name is: Thread5 == request_no  is: 8 == Response Time = 1672
+ ******* totalResponseTime = 53060 == totalReceiveCount = 77 == average = 689
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.296
+Receive ==>> thraed name is: Thread2 == request_no  is: 8 == Response Time = 1281
+ ******* totalResponseTime = 54341 == totalReceiveCount = 78 == average = 696
+
+
+Request ==> Thread name is: Thread2 and Request count is Request[10]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.328
+Receive ==>> thraed name is: Thread8 == request_no  is: 9 == Response Time = 1250
+ ******* totalResponseTime = 55591 == totalReceiveCount = 79 == average = 703
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.406
+Receive ==>> thraed name is: Thread10 == request_no  is: 8 == Response Time = 1656
+ ******* totalResponseTime = 57247 == totalReceiveCount = 80 == average = 715
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.437
+Receive ==>> thraed name is: Thread4 == request_no  is: 9 == Response Time = 1359
+ ******* totalResponseTime = 58606 == totalReceiveCount = 81 == average = 723
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.468
+Receive ==>> thraed name is: Thread1 == request_no  is: 9 == Response Time = 1359
+ ******* totalResponseTime = 59965 == totalReceiveCount = 82 == average = 731
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.515
+Receive ==>> thraed name is: Thread6 == request_no  is: 8 == Response Time = 1735
+ ******* totalResponseTime = 61700 == totalReceiveCount = 83 == average = 743
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.546
+Receive ==>> thraed name is: Thread5 == request_no  is: 9 == Response Time = 1375
+ ******* totalResponseTime = 63075 == totalReceiveCount = 84 == average = 750
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.578
+Receive ==>> thraed name is: Thread7 == request_no  is: 9 == Response Time = 1406
+ ******* totalResponseTime = 64481 == totalReceiveCount = 85 == average = 758
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.593
+Receive ==>> thraed name is: Thread3 == request_no  is: 9 == Response Time = 1359
+ ******* totalResponseTime = 65840 == totalReceiveCount = 86 == average = 765
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:26.781
+Receive ==>> thraed name is: Thread6 == request_no  is: 9 == Response Time = 1484
+ ******* totalResponseTime = 67324 == totalReceiveCount = 87 == average = 773
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.234
+Receive ==>> thraed name is: Thread9 == request_no  is: 9 == Response Time = 1938
+ ******* totalResponseTime = 69262 == totalReceiveCount = 88 == average = 787
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.343
+Receive ==>> thraed name is: Thread7 == request_no  is: 10 == Response Time = 1578
+ ******* totalResponseTime = 70840 == totalReceiveCount = 89 == average = 795
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.375
+Receive ==>> thraed name is: Thread10 == request_no  is: 9 == Response Time = 2079
+ ******* totalResponseTime = 72919 == totalReceiveCount = 90 == average = 810
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.375
+Receive ==>> thraed name is: Thread5 == request_no  is: 10 == Response Time = 1610
+ ******* totalResponseTime = 74529 == totalReceiveCount = 91 == average = 819
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.453
+Receive ==>> thraed name is: Thread3 == request_no  is: 10 == Response Time = 1688
+ ******* totalResponseTime = 76217 == totalReceiveCount = 92 == average = 828
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.593
+Receive ==>> thraed name is: Thread2 == request_no  is: 9 == Response Time = 2047
+ ******* totalResponseTime = 78264 == totalReceiveCount = 93 == average = 841
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.734
+Receive ==>> thraed name is: Thread1 == request_no  is: 10 == Response Time = 2016
+ ******* totalResponseTime = 80280 == totalReceiveCount = 94 == average = 854
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.859
+Receive ==>> thraed name is: Thread4 == request_no  is: 10 == Response Time = 2094
+ ******* totalResponseTime = 82374 == totalReceiveCount = 95 == average = 867
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.875
+Receive ==>> thraed name is: Thread10 == request_no  is: 10 == Response Time = 2032
+ ******* totalResponseTime = 84406 == totalReceiveCount = 96 == average = 879
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:27.968
+Receive ==>> thraed name is: Thread6 == request_no  is: 10 == Response Time = 2062
+ ******* totalResponseTime = 86468 == totalReceiveCount = 97 == average = 891
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:28.015
+Receive ==>> thraed name is: Thread2 == request_no  is: 10 == Response Time = 1703
+ ******* totalResponseTime = 88171 == totalReceiveCount = 98 == average = 899
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:28.218
+Receive ==>> thraed name is: Thread9 == request_no  is: 10 == Response Time = 2375
+ ******* totalResponseTime = 90546 == totalReceiveCount = 99 == average = 914
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%after listen:2007-07-29 12:44:28.234
+Receive ==>> thraed name is: Thread8 == request_no  is: 10 == Response Time = 2563
+ ******* totalResponseTime = 93109 == totalReceiveCount = 100 == average = 931
+

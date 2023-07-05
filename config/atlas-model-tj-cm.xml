@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Ramin (DPI) -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!--The following line is commented because it degrades the performance signifiacantly-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+            <!--            <value>oracle.jdbc.driver.OracleDriver</value>-->
+            <value>com.p6spy.engine.spy.P6SpyDriver</value>
+            <!--            <value>hit.db2.Db2Driver</value>-->
+        </property>
+        <property name="url">
+            <!--value>jdbc:microsoft:sqlserver://172.16.202.61:1433;DatabaseName=atlasdb;SelectMethod=cursor;sendStringParametersAsUnicode=false</value-->
+            <!--            <value>jdbc:oracle:thin:@172.16.202.246:1521:test</value>-->
+            <!--                <value>jdbc:db2://10.0.0.11:453;rdbname=ATLS</value>-->
+            <value>jdbc:db2://172.16.209.225:449;rdbname=TICALOC</value>
+        </property>
+        <property name="username">
+            <!--            <value>sa4</value>-->
+            <value>atlas</value>
+        </property>
+        <property name="password">
+            <!--            <value>oracle</value>-->
+            <value>switch2</value>
+        </property>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref local="dataSource"/>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>atlas/hibernate/AccountType.hbm.xml</value>
+                <value>atlas/hibernate/AcqBankFee.hbm.xml</value>
+                <value>atlas/hibernate/AcqIssuer.hbm.xml</value>
+                <value>atlas/hibernate/AcqPaymentTemplate.hbm.xml</value>
+                <value>atlas/hibernate/AcqPaymentsFee.hbm.xml</value>
+                <value>atlas/hibernate/Acquirer.hbm.xml</value>
+                <value>atlas/hibernate/Action.hbm.xml</value>
+                <value>atlas/hibernate/ActionCode.hbm.xml</value>
+                <value>atlas/hibernate/Object.hbm.xml</value>
+                <value>atlas/hibernate/AtlasSubSystem.hbm.xml</value>
+                <value>atlas/hibernate/AtlasTable.hbm.xml</value>
+                <value>atlas/hibernate/AuthPaymentTemplate.hbm.xml</value>
+                <value>atlas/hibernate/AuthPaymentsFee.hbm.xml</value>
+                <value>atlas/hibernate/AuthStage.hbm.xml</value>
+                <value>atlas/hibernate/BatchDetailLocal.hbm.xml</value>
+                <value>atlas/hibernate/BatchDetailRemote.hbm.xml</value>
+                <value>atlas/hibernate/BatchLocal.hbm.xml</value>
+                <value>atlas/hibernate/BatchRemote.hbm.xml</value>
+                <value>atlas/hibernate/BatchSrvPinIssue.hbm.xml</value>
+                <value>atlas/hibernate/BlockedTransaction.hbm.xml</value>
+                <value>atlas/hibernate/Card.hbm.xml</value>
+                <value>atlas/hibernate/CardAccount.hbm.xml</value>
+                <value>atlas/hibernate/CardApp.hbm.xml</value>
+                <value>atlas/hibernate/CardApplication.hbm.xml</value>
+                <value>atlas/hibernate/CardCopy.hbm.xml</value>
+                <value>atlas/hibernate/CardIssueHistory.hbm.xml</value>
+                <value>atlas/hibernate/CardRange.hbm.xml</value>
+                <value>atlas/hibernate/CardRangeSwitchMap.hbm.xml</value>
+                <value>atlas/hibernate/CardSecNumMethod.hbm.xml</value>
+                <value>atlas/hibernate/CardTemplate.hbm.xml</value>
+                <value>atlas/hibernate/CardTemplateApp.hbm.xml</value>
+                <value>atlas/hibernate/CardType.hbm.xml</value>
+                <value>atlas/hibernate/ChequeBookReq.hbm.xml</value>
+                <value>atlas/hibernate/City.hbm.xml</value>
+                <value>atlas/hibernate/Cmcounter.hbm.xml</value>
+                <value>atlas/hibernate/CmissuedSrvPin.hbm.xml</value>
+                <value>atlas/hibernate/Cmlog.hbm.xml</value>
+                <value>atlas/hibernate/CmlogParam.hbm.xml</value>
+                <value>atlas/hibernate/Cmparam.hbm.xml</value>
+                <value>atlas/hibernate/Cmserver.hbm.xml</value>
+                <value>atlas/hibernate/Cmsparam.hbm.xml</value>
+                <value>atlas/hibernate/CommonParam.hbm.xml</value>
+                <value>atlas/hibernate/Country.hbm.xml</value>
+                <value>atlas/hibernate/Currency.hbm.xml</value>
+                <value>atlas/hibernate/CurrentValue.hbm.xml</value>
+                <value>atlas/hibernate/CustAccWhiteList.hbm.xml</value>
+                <value>atlas/hibernate/Customer.hbm.xml</value>
+                <value>atlas/hibernate/CustomerAccount.hbm.xml</value>
+                <value>atlas/hibernate/CustomerTemplate.hbm.xml</value>
+                <value>atlas/hibernate/Diagnostic.hbm.xml</value>
+                <value>atlas/hibernate/Did.hbm.xml</value>
+                <value>atlas/hibernate/Dtproperty.hbm.xml</value>
+                <value>atlas/hibernate/FailedCommand.hbm.xml</value>
+                <value>atlas/hibernate/FailedSend.hbm.xml</value>
+                <value>atlas/hibernate/FeeType.hbm.xml</value>
+                <value>atlas/hibernate/GapGenMethod.hbm.xml</value>
+                <value>atlas/hibernate/Group.hbm.xml</value>
+                <value>atlas/hibernate/HotList.hbm.xml</value>
+                <value>atlas/hibernate/InactiveCard.hbm.xml</value>
+                <value>atlas/hibernate/IssuedCard.hbm.xml</value>
+                <value>atlas/hibernate/Issuer.hbm.xml</value>
+                <value>atlas/hibernate/IssuerBranch.hbm.xml</value>
+                <value>atlas/hibernate/IssuerContract.hbm.xml</value>
+                <value>atlas/hibernate/IssuerLinkedFit.hbm.xml</value>
+                <value>atlas/hibernate/JobClassArg.hbm.xml</value>
+                <value>atlas/hibernate/JobClassDefinition.hbm.xml</value>
+                <value>atlas/hibernate/JobDefinition.hbm.xml</value>
+                <value>atlas/hibernate/JobGroup.hbm.xml</value>
+                <value>atlas/hibernate/JobHistory.hbm.xml</value>
+                <value>atlas/hibernate/JobHistoryData.hbm.xml</value>
+                <value>atlas/hibernate/JobSchedule.hbm.xml</value>
+                <value>atlas/hibernate/JobScheduleParam.hbm.xml</value>
+                <value>atlas/hibernate/JobStatus.hbm.xml</value>
+                <value>atlas/hibernate/Language.hbm.xml</value>
+                <value>atlas/hibernate/License.hbm.xml</value>
+                <value>atlas/hibernate/LocalNetworkRegistry.hbm.xml</value>
+                <value>atlas/hibernate/LocalNetworkRegistryData.hbm.xml</value>
+                <value>atlas/hibernate/Locale.hbm.xml</value>
+                <value>atlas/hibernate/LostCard.hbm.xml</value>
+                <value>atlas/hibernate/Masparam.hbm.xml</value>
+                <value>atlas/hibernate/Merchant.hbm.xml</value>
+                <value>atlas/hibernate/MerchantBatch.hbm.xml</value>
+                <value>atlas/hibernate/MerchantBatchPayment.hbm.xml</value>
+                <value>atlas/hibernate/MerchantBranch.hbm.xml</value>
+                <value>atlas/hibernate/MerchantCategory.hbm.xml</value>
+                <value>atlas/hibernate/MerchantContract.hbm.xml</value>
+                <value>atlas/hibernate/MerchantGroup.hbm.xml</value>
+                <value>atlas/hibernate/MessageBill.hbm.xml</value>
+                <value>atlas/hibernate/MessageLog.hbm.xml</value>
+                <value>atlas/hibernate/MessageLogArc.hbm.xml</value>
+                <value>atlas/hibernate/MessageStatus.hbm.xml</value>
+                <value>atlas/hibernate/ModeAction.hbm.xml</value>
+                <value>atlas/hibernate/ModemMode.hbm.xml</value>
+                <value>atlas/hibernate/ModemProtocol.hbm.xml</value>
+                <value>atlas/hibernate/Mskey.hbm.xml</value>
+                <value>atlas/hibernate/Ndcatmtemplate.hbm.xml</value>
+                <value>atlas/hibernate/NdcatmtmplScreen.hbm.xml</value>
+                <value>atlas/hibernate/NdcatmtmplState.hbm.xml</value>
+                <value>atlas/hibernate/NdcatmtmplTimer.hbm.xml</value>
+                <value>atlas/hibernate/Ndcfield.hbm.xml</value>
+                <value>atlas/hibernate/NdckeyChangeVal.hbm.xml</value>
+                <value>atlas/hibernate/NdcmessageLog.hbm.xml</value>
+                <value>atlas/hibernate/NdcmessageLogArc.hbm.xml</value>
+                <value>atlas/hibernate/NdcoptionNumber.hbm.xml</value>
+                <value>atlas/hibernate/NdcoptionsCode.hbm.xml</value>
+                <value>atlas/hibernate/Ndcparam.hbm.xml</value>
+                <value>atlas/hibernate/NdcreceiptDef.hbm.xml</value>
+                <value>atlas/hibernate/NdcscreenDef.hbm.xml</value>
+                <value>atlas/hibernate/NdcstateType.hbm.xml</value>
+                <value>atlas/hibernate/NdctermControl.hbm.xml</value>
+                <value>atlas/hibernate/NdctermCounter.hbm.xml</value>
+                <value>atlas/hibernate/NdctermFit.hbm.xml</value>
+                <value>atlas/hibernate/NdctermOption.hbm.xml</value>
+                <value>atlas/hibernate/NdctermSolicited.hbm.xml</value>
+                <value>atlas/hibernate/NdctermStatus.hbm.xml</value>
+                <value>atlas/hibernate/NdctermStatusArc.hbm.xml</value>
+                <value>atlas/hibernate/NdctermTimer.hbm.xml</value>
+                <value>atlas/hibernate/Ndcterminal.hbm.xml</value>
+                <value>atlas/hibernate/NdcterminalState.hbm.xml</value>
+                <value>atlas/hibernate/Ndctimer.hbm.xml</value>
+                <value>atlas/hibernate/NdctmplFit.hbm.xml</value>
+                <value>atlas/hibernate/NdctmplOption.hbm.xml</value>
+                <value>atlas/hibernate/ObjectId.hbm.xml</value>
+                <value>atlas/hibernate/ObjectPrvAction.hbm.xml</value>
+                <value>atlas/hibernate/ObjectPrvRole.hbm.xml</value>
+                <value>atlas/hibernate/OffLineNameServer.hbm.xml</value>
+                <value>atlas/hibernate/OfflineAcqMsg.hbm.xml</value>
+                <value>atlas/hibernate/OfflineMsg.hbm.xml</value>
+                <value>atlas/hibernate/PangenerationAlgorithm.hbm.xml</value>
+                <value>atlas/hibernate/ParamAtmstatus.hbm.xml</value>
+                <value>atlas/hibernate/ParamDirection.hbm.xml</value>
+                <value>atlas/hibernate/PinOffsetAlgorithm.hbm.xml</value>
+                <value>atlas/hibernate/PinPaperContent.hbm.xml</value>
+                <value>atlas/hibernate/PinPaperTemplate.hbm.xml</value>
+                <value>atlas/hibernate/PinPaperTmplCnt.hbm.xml</value>
+                <value>atlas/hibernate/PinblockFormat.hbm.xml</value>
+                <value>atlas/hibernate/PosOptionField.hbm.xml</value>
+                <value>atlas/hibernate/PosOptionGroup.hbm.xml</value>
+                <value>atlas/hibernate/Posparam.hbm.xml</value>
+                <value>atlas/hibernate/Posstatus.hbm.xml</value>
+                <value>atlas/hibernate/Postemplate.hbm.xml</value>
+                <value>atlas/hibernate/Privilege.hbm.xml</value>
+                <value>atlas/hibernate/Program.hbm.xml</value>
+                <value>atlas/hibernate/Province.hbm.xml</value>
+                <value>atlas/hibernate/QueryLog.hbm.xml</value>
+                <value>atlas/hibernate/QueryLogArc.hbm.xml</value>
+                <value>atlas/hibernate/ReconciliationLog.hbm.xml</value>
+                <value>atlas/hibernate/RegistryType.hbm.xml</value>
+                <value>atlas/hibernate/Report.hbm.xml</value>
+                <value>atlas/hibernate/ReportCategory.hbm.xml</value>
+                <value>atlas/hibernate/ReportDestination.hbm.xml</value>
+                <value>atlas/hibernate/ReportFormat.hbm.xml</value>
+                <value>atlas/hibernate/ReportsParam.hbm.xml</value>
+                <value>atlas/hibernate/Resource.hbm.xml</value>
+                <value>atlas/hibernate/Role.hbm.xml</value>
+                <value>atlas/hibernate/RoleGroup.hbm.xml</value>
+                <value>atlas/hibernate/RoutingSwitchMap.hbm.xml</value>
+                <value>atlas/hibernate/Saflog.hbm.xml</value>
+                <value>atlas/hibernate/SchFundTransfer.hbm.xml</value>
+                <value>atlas/hibernate/ScheduledUtility.hbm.xml</value>
+                <value>atlas/hibernate/SecurityLog.hbm.xml</value>
+                <value>atlas/hibernate/SecurityLogArc.hbm.xml</value>
+                <value>atlas/hibernate/Sequence.hbm.xml</value>
+                <value>atlas/hibernate/ServicePeriod.hbm.xml</value>
+                <value>atlas/hibernate/ServicePinprint.hbm.xml</value>
+                <value>atlas/hibernate/SpwLog.hbm.xml</value>
+                <value>atlas/hibernate/Style.hbm.xml</value>
+                <value>atlas/hibernate/SubTransList.hbm.xml</value>
+                <value>atlas/hibernate/Switch.hbm.xml</value>
+                <value>atlas/hibernate/SwitchContract.hbm.xml</value>
+                <value>atlas/hibernate/SwitchFee.hbm.xml</value>
+                <value>atlas/hibernate/SwitchMode.hbm.xml</value>
+                <value>atlas/hibernate/SwitchParam.hbm.xml</value>
+                <value>atlas/hibernate/SwitchRouteScheduling.hbm.xml</value>
+                <value>atlas/hibernate/SystemCategory.hbm.xml</value>
+                <value>atlas/hibernate/TemplateType.hbm.xml</value>
+                <value>atlas/hibernate/TermAcquirer.hbm.xml</value>
+                <value>atlas/hibernate/TermBranch.hbm.xml</value>
+                <value>atlas/hibernate/TermTypeTran.hbm.xml</value>
+                <value>atlas/hibernate/Terminal.hbm.xml</value>
+                <value>atlas/hibernate/TerminalPo.hbm.xml</value>
+                <value>atlas/hibernate/TerminalRangeLimit.hbm.xml</value>
+                <value>atlas/hibernate/TerminalType.hbm.xml</value>
+                <value>atlas/hibernate/TerminalWeb.hbm.xml</value>
+                <value>atlas/hibernate/TrackFormat.hbm.xml</value>
+                <value>atlas/hibernate/TransAuthStage.hbm.xml</value>
+                <value>atlas/hibernate/TransGroup.hbm.xml</value>
+                <value>atlas/hibernate/TransList.hbm.xml</value>
+                <value>atlas/hibernate/TransSubGroup.hbm.xml</value>
+                <value>atlas/hibernate/Transaction.hbm.xml</value>
+                <value>atlas/hibernate/TransactionFeeType.hbm.xml</value>
+                <value>atlas/hibernate/UndeliveredMsg.hbm.xml</value>
+                <value>atlas/hibernate/User.hbm.xml</value>
+                <value>atlas/hibernate/UserResource.hbm.xml</value>
+                <value>atlas/hibernate/Utility.hbm.xml</value>
+                <value>atlas/hibernate/UtilityBranch.hbm.xml</value>
+                <value>atlas/hibernate/UtilityPayment.hbm.xml</value>
+                <value>atlas/hibernate/UtilityWhiteList.hbm.xml</value>
+                <value>atlas/hibernate/HostTxnLog.hbm.xml</value>
+                <value>atlas/hibernate/SparrowState.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <!--                <prop key="hibernate.dialect">net.sf.hibernate.dialect.OracleDialect</prop>-->
+                <prop key="hibernate.dialect">net.sf.hibernate.dialect.DB2390Dialect</prop>
+                <!--                <prop key="hibernate.dialect">net.sf.hibernate.dialect.DB2400Dialect</prop>-->
+                <!--                <prop key="hibernate.dialect">net.sf.hibernate.dialect.DB2Dialect</prop>-->
+
+                <prop key="hibernate.dbcp.maxIdle">50</prop>
+                <prop key="hibernate.dbcp.maxActive">200</prop>
+                <prop key="hibernate.dbcp.maxWait">-1</prop>
+                <prop key="hibernate.dbcp.whenExhaustedAction">2</prop>
+                <prop key="hibernate.dbcp.ps.maxIdle">500</prop>
+                <prop key="hibernate.dbcp.ps.maxActive">2000</prop>
+                <prop key="hibernate.dbcp.ps.maxWait">-1</prop>
+                <prop key="hibernate.dbcp.ps.whenExhaustedAction">2</prop>
+
+
+                <!--
+                                <prop key="hibernate.c3p0.min_size">200</prop>
+                                <prop key="hibernate.c3p0.max_size">1000</prop>
+                                <prop key="hibernate.c3p0.timeout">300</prop>
+                                <prop key="hibernate.c3p0.max_statements">1500</prop>
+                                <prop key="hibernate.c3p0.idle_test_period">3000</prop>
+                -->
+
+                <!--                <prop key="hibernate.proxool.properties">proxool.properties</prop>-->
+
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="cmFacadeIB" class="dpi.atlas.service.cm.ib.CMFacadeIBImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="sparrowStateDao" class="dpi.atlas.model.tj.dao.SparrowStateDaoHBM">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    <bean id="issuerBranchDaoHB" class="dpi.atlas.model.tj.dao.IssuerBranchDaoHBM">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+
+    <bean id="sms.Convertor.BAL" class="dpi.atlas.service.cm.imf.sms.BAL2IMFFormatter"/>
+    <bean id="sms.Convertor.MSTM" class="dpi.atlas.service.cm.imf.sms.BAL2IMFFormatter"/>
+    <bean id="sms.Convertor.STM" class="dpi.atlas.service.cm.imf.sms.STM2IMFFormatter"/>
+    <bean id="sms.Convertor.DEF" class="dpi.atlas.service.cm.imf.sms.DEF2IMFFormatter"/>
+    <bean id="sms.Convertor.ACL" class="dpi.atlas.service.cm.imf.sms.ACL2IMFFormatter"/>
+    <bean id="sms.Convertor.PIN" class="dpi.atlas.service.cm.imf.sms.PIN2IMFFormatter"/>
+    <bean id="sms.Convertor.HLP" class="dpi.atlas.service.cm.imf.sms.HELP2IMFFormatter"/>
+
+
+    <bean id="sms.resp.convertor.HLP" class="dpi.atlas.service.cm.handler.sms.resp.HelpFormatter"/>
+    <bean id="sms.resp.convertor.BAL" class="dpi.atlas.service.cm.handler.sms.resp.BALFormatter"/>
+    <bean id="sms.resp.convertor.DEF" class="dpi.atlas.service.cm.handler.sms.resp.DEFFormatter"/>
+    <bean id="sms.resp.convertor.MSTM" class="dpi.atlas.service.cm.handler.sms.resp.MSTMFormatter"/>
+    <bean id="sms.resp.convertor.ACL" class="dpi.atlas.service.cm.handler.sms.resp.ACLFormatter"/>
+
+
+    <bean id="host.post.BAL" class="dpi.atlas.service.cm.host.handlers.GetBalance"/>
+    <bean id="host.post.MSTM" class="dpi.atlas.service.cm.host.handlers.GetMiniStatement"/>
+    <bean id="host.post.ACL" class="dpi.atlas.service.cm.host.handlers.GetAccountList"/>
+    <bean id="host.post.STM" class="dpi.atlas.service.cm.host.handlers.GetStatement"/>
+    <bean id="host.post.PAY" class="dpi.atlas.service.cm.host.handlers.FundTransfer"/>
+
+    <!-- CFS ATM Transactions   -->
+
+    <bean id="convertor0020" class="dpi.atlas.service.cm.imf.spw.atm.FastCashReversalConvertor"/>
+    <bean id="convertor0040" class="dpi.atlas.service.cm.imf.spw.atm.FundTransferReversalConvertor"/>
+    <bean id="convertor0080" class="dpi.atlas.service.cm.imf.spw.atm.CashWithdrawalReversalConvertor"/>
+    <bean id="convertor0520" class="dpi.atlas.service.cm.imf.spw.atm.FastCashConvertor"/>
+    <bean id="convertor0300" class="dpi.atlas.service.cm.imf.spw.atm.AccInfoReqConvertor"/>
+    <bean id="convertor0530" class="dpi.atlas.service.cm.imf.spw.atm.BalanceConvertor"/>
+    <bean id="convertor0531" class="dpi.atlas.service.cm.imf.spw.atm.NetworkBalanceConvertor"/>
+    <bean id="convertor0540" class="dpi.atlas.service.cm.imf.spw.atm.FundTransferConvertor"/>
+    <bean id="convertor0550" class="dpi.atlas.service.cm.imf.spw.atm.AccountStatementConvertor"/>
+    <bean id="convertor0555" class="dpi.atlas.service.cm.imf.spw.atm.MiniStatementConvertor"/>
+    <bean id="convertor0561" class="dpi.atlas.service.cm.imf.spw.atm.DepositCashConvertor"/>
+    <bean id="convertor0562" class="dpi.atlas.service.cm.imf.spw.atm.DepositChequeConvertor"/>
+    <bean id="convertor0563" class="dpi.atlas.service.cm.imf.spw.atm.DepositMixedConvertor"/>
+    <bean id="convertor0564" class="dpi.atlas.service.cm.imf.spw.atm.DepositOrderConvertor"/>
+    <bean id="convertor0570" class="dpi.atlas.service.cm.imf.spw.atm.ChequeBookRequestConvertor"/>
+    <bean id="convertor0580" class="dpi.atlas.service.cm.imf.spw.atm.CashWithdrawalConvertor"/>
+    <bean id="convertor0590" class="dpi.atlas.service.cm.imf.spw.atm.PinChangeConvertor"/>
+    <bean id="convertor5599" class="dpi.atlas.service.cm.imf.spw.atm.LoroConvertor"/>
+    <bean id="convertor0620" class="dpi.atlas.service.cm.imf.spw.atm.NetworkFastCashConvertor"/>
+    <bean id="convertor0631" class="dpi.atlas.service.cm.imf.spw.atm.NetworkBalanceConvertor"/>
+    <bean id="convertor0640" class="dpi.atlas.service.cm.imf.spw.atm.NetworkFundTransferConvertor"/>
+    <bean id="convertor0680" class="dpi.atlas.service.cm.imf.spw.atm.NetworkCashWithdrawalConvertor"/>
+    <bean id="convertor0720" class="dpi.atlas.service.cm.imf.spw.atm.NetworkFastCashReversalConvertor"/>
+    <bean id="convertor0740" class="dpi.atlas.service.cm.imf.spw.atm.NetworkFundTransferReversalConvertor"/>
+    <bean id="convertor0780" class="dpi.atlas.service.cm.imf.spw.atm.NetworkCashWithdrawalReversalConvertor"/>
+
+    <!-- CFS POS Transactions   -->
+
+    <bean id="convertor0621" class="dpi.atlas.service.cm.imf.spw.pos.CashRequestConvertor"/>
+    <bean id="convertor0622" class="dpi.atlas.service.cm.imf.spw.pos.SaleRequestConvertor"/>
+    <bean id="convertor0623" class="dpi.atlas.service.cm.imf.spw.pos.RefundRequestConvertor"/>
+    <bean id="convertor0624" class="dpi.atlas.service.cm.imf.spw.pos.SaleWithCashRequestConvertor"/>
+    <bean id="convertor0625" class="dpi.atlas.service.cm.imf.spw.pos.MerchantBatchCreditConvertor"/>
+    <bean id="convertor0626" class="dpi.atlas.service.cm.imf.spw.pos.MerchantBatchDebitConvertor"/>
+    <bean id="convertor0721" class="dpi.atlas.service.cm.imf.spw.pos.CashRequestReversalConvertor"/>
+    <bean id="convertor0722" class="dpi.atlas.service.cm.imf.spw.pos.SaleRequestReversalConvertor"/>
+    <bean id="convertor0724" class="dpi.atlas.service.cm.imf.spw.pos.SaleWithCashRequestReversalConvertor"/>
+
+
+    <bean id="ojbConfigurer" class="org.springframework.orm.ojb.support.LocalOjbConfigurer"/>
+
+    <bean id="crmTransactionManager" class="org.springframework.orm.ojb.PersistenceBrokerTransactionManager">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+
+    <bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+        abstract="true">
+        <property name="transactionManager">
+            <ref bean="crmTransactionManager"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="apply*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="set*">PROPAGATION_REQUIRED</prop>
+                <prop key="reverse*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    <!--              N D C                                      -->
+    <bean id="atmStatusDao" class="dpi.atlas.model.dao.ndc.ojb.ATMStatusDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="atmActivityDao" class="dpi.atlas.model.dao.ndc.ojb.ATMActivityDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcMessageLogDao" class="dpi.atlas.model.dao.ndc.ojb.NDCMessageLogDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcTermSolicitedDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermSolicitedDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcTermStatusDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermStatusDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcTermSolicited2Dao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermSolicited2DaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcTermStatus2Dao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermStatus2DaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcTerminalDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTerminalDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcReceiptDefDao" class="dpi.atlas.model.dao.ndc.ojb.NDCReceiptDefDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcAtmTemplateDao" class="dpi.atlas.model.dao.ndc.ojb.NDCATMTemplateDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcParamDao" class="dpi.atlas.model.dao.ndc.ojb.NDCParamDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="atmTmplStateDao" class="dpi.atlas.model.dao.ndc.ojb.ATMTmplStateDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="atmTmplScreenDao" class="dpi.atlas.model.dao.ndc.ojb.ATMTmplScreenDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcTerminalOptionDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTerminalOptionDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcTermTimerDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermTimerDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcTermFITDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermFITDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="issuerLinkedFITDao" class="dpi.atlas.model.dao.ndc.ojb.IssuerLinkedFITDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcTermControlDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermControlDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="ndcTermCounterDao" class="dpi.atlas.model.dao.ndc.ojb.NDCTermCounterDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="ndcMessageDumpDao" class="dpi.atlas.model.dao.ndc.ojb.NDCMessageDumpDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <!--              S W I T C H                                    -->
+    <bean id="safLogDao" class="dpi.atlas.model.dao.sw.ojb.SAFLogDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="failedReversalDao" class="dpi.atlas.model.dao.sw.ojb.FailedReversalDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="messageLogDao" class="dpi.atlas.model.dao.sw.ojb.MessageLogDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="offlineMsgDao" class="dpi.atlas.model.dao.sw.ojb.OfflineMsgDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="undeliveredMsgDao" class="dpi.atlas.model.dao.sw.ojb.UndeliveredMsgDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <bean id="cardRangeDao" class="dpi.atlas.model.dao.sw.ojb.CardRangeDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="routingSwitchMapDao" class="dpi.atlas.model.dao.sw.ojb.RoutingSwitchMapDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="switchDao" class="dpi.atlas.model.dao.sw.ojb.SwitchDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="calendarSettleDao" class="dpi.atlas.model.dao.sw.ojb.CalendarSettleDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="batchLocalDao" class="dpi.atlas.model.dao.batch.ojb.BatchLocalDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="batchDetailLocalDao" class="dpi.atlas.model.dao.batch.ojb.BatchDetailLocalDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="batchRemoteDao" class="dpi.atlas.model.dao.batch.ojb.BatchRemoteDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="batchDetailRemoteDao" class="dpi.atlas.model.dao.batch.ojb.BatchDetailRemoteDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <!--              C O M M O N                                   -->
+    <bean id="sequenceDao" class="dpi.atlas.model.dao.common.ojb.SequenceDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="issuerBranchDao" class="dpi.atlas.model.dao.common.ojb.IssuerBranchDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="terminalDao" class="dpi.atlas.model.dao.common.ojb.TerminalDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="transactionDao" class="dpi.atlas.model.dao.common.ojb.TransactionDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cityDao" class="dpi.atlas.model.dao.common.ojb.CityDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="currentValuesDao" class="dpi.atlas.model.dao.common.ojb.CurrentValuesDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <!--                C h a n n e l   M a n a g e r                       -->
+    <bean id="cmLogDao" class="dpi.atlas.model.dao.cm.ojb.CMLogDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cmCounterDao" class="dpi.atlas.model.dao.cm.ojb.CMCounterDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cmServerDao" class="dpi.atlas.model.dao.cm.ojb.CMServerDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="accountOfflineBalanceDao" class="dpi.atlas.model.dao.cm.ojb.AccountOfflineBalanceDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="hostBatchDao" class="dpi.atlas.model.dao.cm.ojb.HostBatchDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="hostStatusDao" class="dpi.atlas.model.dao.cm.ojb.HostStatusDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <!--<bean id="hostFTLogDao" class="dpi.atlas.model.dao.cm.ojb.HostFTLogDaoOJB">-->
+    <!--<property name="jcdAlias">-->
+    <!--<value>atlasdb</value>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <bean id="eventStatusDao" class="dpi.atlas.model.dao.event.ojb.EventStatusDaoOJB">
+        <property name="jcdAlias">
+            <value>alarmdb</value>
+        </property>
+    </bean>
+
+
+    <!--                A U T H O R I Z E R                                 -->
+    <bean id="issuerDao" class="dpi.atlas.model.dao.auth.ojb.IssuerDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cardAccountDao" class="dpi.atlas.model.dao.auth.ojb.CardAccountDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cardDao" class="dpi.atlas.model.dao.auth.ojb.CardDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cardAppDao" class="dpi.atlas.model.dao.auth.ojb.CardAppDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cardTemplateAppDao" class="dpi.atlas.model.dao.auth.ojb.CardTemplateAppDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="customerDao" class="dpi.atlas.model.dao.auth.ojb.CustomerDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="customerAccountDao" class="dpi.atlas.model.dao.auth.ojb.CustomerAccountDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="cardApplicationDao" class="dpi.atlas.model.dao.auth.ojb.CardApplicationDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+    <bean id="issuedCardDao" class="dpi.atlas.model.dao.auth.ojb.IssuedCardDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <!--                H S M                       -->
+    <bean id="msKeyDao" class="dpi.atlas.model.dao.hsm.ojb.MSKeyDaoOJB">
+        <property name="jcdAlias">
+            <value>atlasdb</value>
+        </property>
+    </bean>
+
+    <!--              F A C A D E                                    -->
+    <bean id="ndcFacade" parent="baseTransactionProxy">
+        <property name="target">
+
+            <bean id="ndcFacadeInternal" class="dpi.atlas.model.facade.ndc.NDCFacadeImpl">
+                <property name="ndcMessageLogDao">
+                    <ref bean="ndcMessageLogDao"/>
+                </property>
+                <property name="ndcTermSolicitedDao">
+                    <ref bean="ndcTermSolicitedDao"/>
+                </property>
+                <property name="ndcTermSolicited2Dao">
+                    <ref bean="ndcTermSolicited2Dao"/>
+                </property>
+                <property name="ndcTermStatusDao">
+                    <ref bean="ndcTermStatusDao"/>
+                </property>
+                <property name="ndcTermStatus2Dao">
+                    <ref bean="ndcTermStatus2Dao"/>
+                </property>
+                <property name="ndcTerminalDao">
+                    <ref bean="ndcTerminalDao"/>
+                </property>
+                <property name="ndcReceiptDefDao">
+                    <ref bean="ndcReceiptDefDao"/>
+                </property>
+                <property name="ndcAtmTemplateDao">
+                    <ref bean="ndcAtmTemplateDao"/>
+                </property>
+                <property name="ndcParamDao">
+                    <ref bean="ndcParamDao"/>
+                </property>
+                <property name="atmTmplStateDao">
+                    <ref bean="atmTmplStateDao"/>
+                </property>
+                <property name="atmTmplScreenDao">
+                    <ref bean="atmTmplScreenDao"/>
+                </property>
+                <property name="ndcTerminalOptionDao">
+                    <ref bean="ndcTerminalOptionDao"/>
+                </property>
+                <property name="ndcTermTimerDao">
+                    <ref bean="ndcTermTimerDao"/>
+                </property>
+                <property name="ndcTermFITDao">
+                    <ref bean="ndcTermFITDao"/>
+                </property>
+                <property name="issuerLinkedFITDao">
+                    <ref bean="issuerLinkedFITDao"/>
+                </property>
+                <property name="ndcTermControlDao">
+                    <ref bean="ndcTermControlDao"/>
+                </property>
+                <property name="ndcTermCounterDao">
+                    <ref bean="ndcTermCounterDao"/>
+                </property>
+                <property name="ndcMessageDumpDao">
+                    <ref bean="ndcMessageDumpDao"/>
+                </property>
+                <property name="atmStatusDao">
+                    <ref bean="atmStatusDao"/>
+                </property>
+                <property name="atmActivityDao">
+                    <ref bean="atmActivityDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="switchFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="switchFacadeInternal" class="dpi.atlas.model.facade.sw.SwitchFacadeImpl">
+                <property name="messageLogDao">
+                    <ref bean="messageLogDao"/>
+                </property>
+                <property name="offlineMsgDao">
+                    <ref bean="offlineMsgDao"/>
+                </property>
+                <property name="undeliveredMsgDao">
+                    <ref bean="undeliveredMsgDao"/>
+                </property>
+                <property name="cardRangeDao">
+                    <ref bean="cardRangeDao"/>
+                </property>
+                <property name="routingSwitchMapDao">
+                    <ref bean="routingSwitchMapDao"/>
+                </property>
+                <property name="switchDao">
+                    <ref bean="switchDao"/>
+                </property>
+                <property name="batchLocalDao">
+                    <ref bean="batchLocalDao"/>
+                </property>
+                <property name="batchDetailLocalDao">
+                    <ref bean="batchDetailLocalDao"/>
+                </property>
+                <property name="batchRemoteDao">
+                    <ref bean="batchRemoteDao"/>
+                </property>
+                <property name="batchDetailRemoteDao">
+                    <ref bean="batchDetailRemoteDao"/>
+                </property>
+                <property name="calendarSettleDao">
+                    <ref bean="calendarSettleDao"/>
+                </property>
+                <property name="safLogDao">
+                    <ref bean="safLogDao"/>
+                </property>
+                <property name="failedReversalDao">
+                    <ref bean="failedReversalDao"/>
+                </property>
+
+
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="commonFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="commonFacadeInternal" class="dpi.atlas.model.facade.common.CommonFacadeImpl">
+                <property name="sequenceDao">
+                    <ref bean="sequenceDao"/>
+                </property>
+                <property name="issuerBranchDao">
+                    <ref bean="issuerBranchDao"/>
+                </property>
+                <property name="terminalDao">
+                    <ref bean="terminalDao"/>
+                </property>
+                <property name="transactionDao">
+                    <ref bean="transactionDao"/>
+                </property>
+                <property name="customerDao">
+                    <ref bean="customerDao"/>
+                </property>
+                <property name="customerAccountDao">
+                    <ref bean="customerAccountDao"/>
+                </property>
+                <property name="cardDao">
+                    <ref bean="cardDao"/>
+                </property>
+                <property name="cardAppDao">
+                    <ref bean="cardAppDao"/>
+                </property>
+                <property name="cardAccountDao">
+                    <ref bean="cardAccountDao"/>
+                </property>
+                <property name="cardApplicationDao">
+                    <ref bean="cardApplicationDao"/>
+                </property>
+                <property name="issuedCardDao">
+                    <ref bean="issuedCardDao"/>
+                </property>
+                <property name="cityDao">
+                    <ref bean="cityDao"/>
+                </property>
+                <property name="currentValuesDao">
+                    <ref bean="currentValuesDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="authorizerFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="authorizerFacadeInternal" class="dpi.atlas.model.facade.auth.AuthorizerFacadeImpl">
+                <property name="issuerDao">
+                    <ref bean="issuerDao"/>
+                </property>
+                <property name="cardAccountDao">
+                    <ref bean="cardAccountDao"/>
+                </property>
+                <property name="cardDao">
+                    <ref bean="cardDao"/>
+                </property>
+                <property name="cardAppDao">
+                    <ref bean="cardAppDao"/>
+                </property>
+                <property name="cardTemplateAppDao">
+                    <ref bean="cardTemplateAppDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="channelFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="channelFacadeInternal" class="dpi.atlas.model.tj.facade.ChannelFacadeImpl">
+                <property name="sparrowStateDao">
+                    <ref bean="sparrowStateDao"/>
+                </property>
+                <property name="issuerBranchDao">
+                    <ref bean="issuerBranchDaoHB"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="cmFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="cmFacadeInternal" class="dpi.atlas.model.facade.cm.CMFacadeImpl">
+                <property name="cmLogDao">
+                    <ref bean="cmLogDao"/>
+                </property>
+                <property name="cmCounterDao">
+                    <ref bean="cmCounterDao"/>
+                </property>
+                <property name="cmServerDao">
+                    <ref bean="cmServerDao"/>
+                </property>
+                <property name="accountOfflineBalanceDao">
+                    <ref bean="accountOfflineBalanceDao"/>
+                </property>
+                <property name="hostBatchDao">
+                    <ref bean="hostBatchDao"/>
+                </property>
+                <property name="hostStatusDao">
+                    <ref bean="hostStatusDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="hsmFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="hsmFacadeInternal" class="dpi.atlas.model.facade.hsm.HSMFacadeImpl">
+                <property name="msKeyDao">
+                    <ref bean="msKeyDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="eventFacade" parent="baseTransactionProxy">
+        <property name="target">
+            <bean id="eventFacadeInternal" class="dpi.atlas.model.facade.event.EventFacadeImpl">
+                <property name="eventStatusDao">
+                    <ref bean="eventStatusDao"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

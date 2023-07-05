@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="CANCELLATION" type="CANCELLATIONType"/>
+    <xsd:complexType name="CANCELLATIONType">
+        <xsd:sequence>
+            <xsd:element type="rrnType" name="RRN"/>
+            <xsd:element type="branchCodeType" name="BRANCH_CODE"/>
+            <xsd:element type="requestNoType" name="REQUEST_NO"/>
+            <xsd:element type="creationDateType" name="CREATION_DATE"/>
+            <xsd:element type="creationTimeType" name="CREATION_TIME"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="rrnType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="branchCodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="6"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="requestNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="creationDateType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="6"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="creationTimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="6"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
+
+        
+
+
+        
+        
+        
+        
+        

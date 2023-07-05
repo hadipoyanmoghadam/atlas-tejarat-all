@@ -1,0 +1,52 @@
+<!-- Definitions for dpi.atlas.model.entity.hsm.MSKey -->
+<class-descriptor
+    class="dpi.atlas.model.entity.hsm.MSKey"
+    table="tbMSKeys"
+    >
+    <field-descriptor
+        name="ID"
+        column="ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="MK"
+        column="MK"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="MK_chk"
+        column="MK_chk"
+        jdbc-type="VARCHAR"
+        />
+
+    <field-descriptor
+        name="PK"
+        column="PK"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="PK_chk"
+        column="PK_chk"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="AK"
+        column="AK"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="AK_chk"
+        column="AK_chk"
+        jdbc-type="VARCHAR"
+        />
+
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+
+</class-descriptor>
+
+

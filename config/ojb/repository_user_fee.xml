@@ -1,0 +1,520 @@
+<!-- Definitions for dpi.atlas.model.entity.fee.TransList-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.TransList"
+    table="TBTransList"
+    >
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="description"
+        column="Description"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="processingCode"
+        column="ProcessingCode"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="functionCode"
+        column="FunctionCode"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="composite"
+        column="Composite"
+        jdbc-type="INTEGER"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.SubTransList-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.SubTransList"
+    table="TBSubTransList"
+    >
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="functionCode"
+        column="FunctionCode"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="subTransactionID"
+        column="Sub_TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="subFunctionCode"
+        column="Sub_FunctionCode"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.AcqBankFees-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.AcqBankFees"
+    table="TBAcqBankFees"
+    >
+    <field-descriptor
+        name="ISOTermType"
+        column="ISOTermType"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="contractID"
+        column="ContractID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="onlineVariableCharge"
+        column="OnlineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+    <field-descriptor
+        name="offlineVariableCharge"
+        column="OfflineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+    <field-descriptor
+        name="onlineFixedCharge"
+        column="OnlineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offlineFixedCharge"
+        column="OfflineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+
+    <field-descriptor
+        name="country"
+        column="Country"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="currency"
+        column="Currency"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="onLineFloorLimit"
+        column="OnLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="onLineCeilingLimit"
+        column="OnLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineFloorLimit"
+        column="OffLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineCeilingLimit"
+        column="OffLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.fee.AcqPaymentsFee-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.AcqPaymentsFee"
+    table="TBAcqPaymentsFee"
+    >
+    <field-descriptor
+        name="templateID"
+        column="TemplateID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="ISOTermType"
+        column="ISOTermType"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="onlineFixedCharge"
+        column="OnlineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offlineFixedCharge"
+        column="OfflineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="onlineVariableCharge"
+        column="OnlineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+    <field-descriptor
+        name="offlineVariableCharge"
+        column="OfflineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+
+    <field-descriptor
+        name="country"
+        column="Country"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="currency"
+        column="Currency"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="onLineFloorLimit"
+        column="OnLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="onLineCeilingLimit"
+        column="OnLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineFloorLimit"
+        column="OffLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineCeilingLimit"
+        column="OffLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.fee.IssuerContract-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.IssuerContract"
+    table="TBIssuerContracts"
+    >
+    <field-descriptor
+        name="contractID"
+        column="ContractID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="description"
+        column="Description"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="startDate"
+        column="StartDate"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="endDate"
+        column="EndDate"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="status"
+        column="Status"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="IIN"
+        column="Issuer_Identification_Number"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="isDefault"
+        column="IsDefault"
+        jdbc-type="INTEGER"
+        />
+
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.fee.Merchant-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.Merchant"
+    table="TBMerchant"
+    >
+    <field-descriptor
+        name="merchantID"
+        column="Merchant_ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="merchantName"
+        column="Merchant_Name"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="status"
+        column="Status"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="effectDate"
+        column="Effect_Date"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="contact"
+        column="Contact"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="merchantGroupID"
+        column="MerchantGroupID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="merchantCategoryCode"
+        column="MerchantCategoryCode"
+        jdbc-type="VARCHAR"
+        />
+
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.MerchantContract-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.MerchantContract"
+    table="TBMerchantContracts"
+    >
+    <field-descriptor
+        name="contractID"
+        column="ContractID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="status"
+        column="Status"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="merchantID"
+        column="MerchantID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="paymentTemplate"
+        column="Payment_Template"
+        jdbc-type="INTEGER"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.SwitchContract-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.SwitchContract"
+    table="TBSwitchContracts"
+    >
+    <field-descriptor
+        name="contractID"
+        column="ContractID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="status"
+        column="Status"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="switchID"
+        column="SwitchID"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.SwitchFee-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.SwitchFee"
+    table="TBSwitchFee"
+    >
+    <field-descriptor
+        name="ISOTermType"
+        column="ISOTermType"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="contractID"
+        column="ContractID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="onlineVariableCharge"
+        column="OnlineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+    <field-descriptor
+        name="offlineVariableCharge"
+        column="OfflineVariableCharge"
+        jdbc-type="FLOAT"
+        />
+    <field-descriptor
+        name="onlineFixedCharge"
+        column="OnlineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offlineFixedCharge"
+        column="OfflineFixedCharge"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="country"
+        column="Country"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="currency"
+        column="Currency"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="onLineFloorLimit"
+        column="OnLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="onLineCeilingLimit"
+        column="OnLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineFloorLimit"
+        column="OffLineFloorLimit"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="offLineCeilingLimit"
+        column="OffLineCeilingLimit"
+        jdbc-type="INTEGER"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+
+<!-- Definitions for dpi.atlas.model.entity.fee.TransactionFeeType-->
+<class-descriptor
+    class="dpi.atlas.model.entity.fee.TransactionFeeType"
+    table="TBTransactionFeeTypes"
+    >
+    <field-descriptor
+        name="switchMode"
+        column="SwitchMode"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="ISOTermType"
+        column="ISOTermType"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="transactionID"
+        column="TransactionID"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="feeTypeCode"
+        column="FeeTypeCode"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="creditDebitFlag"
+        column="CreditDebitFlag"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+

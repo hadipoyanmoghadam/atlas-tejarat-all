@@ -1,0 +1,59 @@
+<!-- Definitions for dpi.atlas.model.entity.hb.MessageBill-->
+<class-descriptor
+    class="dpi.atlas.model.entity.hb.MessageBill"
+    table="TBMessageBills"
+    >
+    <field-descriptor
+        name="pan"
+        column="PAN"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="mti"
+        column="MTI"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="stan"
+        column="STAN"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="dateLocal"
+        column="Date_Local"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="rrn"
+        column="RRN"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="tid"
+        column="TID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="billNo"
+        column="BillNo"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="billDate"
+        column="BillDate"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+

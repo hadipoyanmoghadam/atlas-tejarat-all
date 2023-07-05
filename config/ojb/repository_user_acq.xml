@@ -1,0 +1,180 @@
+<!-- Definitions for dpi.atlas.model.entity.acq.Terminal-->
+<class-descriptor
+    class="dpi.atlas.model.entity.acq.Terminal"
+    table="TBTerminal"
+    >
+    <field-descriptor
+        name="terminalID"
+        column="Terminal_ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="ISOTermType"
+        column="ISOTermType"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="accountNo"
+        column="AccountNo"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.acq.TermBranch-->
+<class-descriptor
+    class="dpi.atlas.model.entity.acq.TermBranch"
+    table="TBTermBranch"
+    >
+    <field-descriptor
+        name="terminalID"
+        column="Terminal_ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="merchantID"
+        column="Merchant_ID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="branchID"
+        column="Branch_ID"
+        jdbc-type="BIGINT"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+
+
+<!-- Definitions for dpi.atlas.model.entity.acq.MerchantBranch-->
+<class-descriptor
+    class="dpi.atlas.model.entity.acq.MerchantBranch"
+    table="TBMerchantBranch"
+    >
+    <field-descriptor
+        name="merchantID"
+        column="Merchant_ID"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="branchID"
+        column="Branch_ID"
+        jdbc-type="BIGINT"
+        />
+    <field-descriptor
+        name="effectDate"
+        column="Effect_Date"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="contact"
+        column="Contact"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="accountNo"
+        column="Account_No"
+        jdbc-type="BIGINT"
+        />
+    <field-descriptor
+        name="internalBranchID"
+        column="Internal_Branch_ID"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="branchName"
+        column="Branch_Name"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="branchAddr"
+        column="Branch_Addr"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="branchTel"
+        column="Branch_Tel"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.acq.MerchantBatch-->
+<class-descriptor
+    class="dpi.atlas.model.entity.acq.MerchantBatch"
+    table="TBMerchantBatch"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="Sequencer"
+        jdbc-type="INTEGER"
+        primarykey="true"
+        autoincrement="true"
+        />
+    <field-descriptor
+        name="TID"
+        column="TID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="currencyCode"
+        column="Currency_Code"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="reconciliationDate"
+        column="ReconciliationDate"
+        jdbc-type="BIGINT"
+        />
+    <field-descriptor
+        name="amount"
+        column="Amount"
+        jdbc-type="BIGINT"
+        />
+    <field-descriptor
+        name="amountFee"
+        column="AmountFee"
+        jdbc-type="BIGINT"
+        />
+    <field-descriptor
+        name="actionCode"
+        column="ActionCode"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="merchantID"
+        column="MerchantID"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="documentNo"
+        column="DocumentNo"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="documentDate"
+        column="DocumentDate"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>

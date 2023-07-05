@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="RE_CREATE_RESPONSE" type="RE_CREATE_RESPONSEType"/>
+    <xsd:complexType name="RE_CREATE_RESPONSEType">
+        <xsd:sequence>
+            <xsd:element type="actionCodeType" name="ACTIONCODE"/>
+            <xsd:element type="descType" name="DESC"/>
+            <xsd:element type="rrnType" name="RRN"/>
+            <xsd:element type="newCardNoType" name="NEW_CARDNO"/>
+            <xsd:element type="respDateTimeType" name="RESPDATETIME"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="actionCodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="4"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="descType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="30"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="rrnType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="12"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="newCardNoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="16"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="respDateTimeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="14"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

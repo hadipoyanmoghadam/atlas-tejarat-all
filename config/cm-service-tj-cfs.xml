@@ -1,0 +1,2026 @@
+<?xml version="1.0" ?>
+<!-- <!DOCTYPE financial-service SYSTEM "cm-service.dtd"> -->
+<cm-service>
+
+    <cm-source name="CFSMQ_TXNS" type="http" class="dpi.atlas.service.cm.source.jms.JMSMQSourceNew"
+               enable="true">
+        <property name="queue-manager" value="CSQ1"/>
+        <property name="queue-manager-hostname" value="127.0.0.1"/>
+        <property name="queue-manager-port" value="1414"/>
+        <property name="receive-queue" value="CM2CFS_ONLINE"/>
+        <property name="qlistener-class-name" value="dpi.atlas.service.cm.source.jms.JMSCFSListenerNew"/>
+        <property name="threadPoolInitSize" value="50"/>
+        <property name="threadPoolMaxSize" value="200"/>
+        <property name="dbConnectionPoolInitSize" value="100"/>
+        <property name="dbConnectionPoolOptimalSize" value="180"/>     
+        <property name="dbConnectionPoolMaxSize" value="500"/> 
+
+  <cm-handler class="dpi.atlas.service.cfs.handler.GetMessageFields"/>
+        <cm-handler class="dpi.atlas.service.cfs.handler.CheckDuplicateNew">
+            <property name="not-for"
+                      value="5STM,BAL,BALBRNCH,CSHWBRNCHR,DEPBRNCHR,FLW,FLWBRNCH,BRCHNGST,STMBRNCH,RSACCBRNCH,GIFCANBR,SMBAL,GIFBAL,GIFDEP,GIFBTBAL,BLNCTRST,CARDSTM,CARDBAL,CHRTX,DCHR,DCHRA,BALCRDTS,STMCRDTS,FLWCRDTS,CSHWCRDTSR,DEPCRDTSR,AMXCHGST,FLWSAFEBX,WFPSTM,IMMCHR,ACCSTM,BALSMS,FLWUSMS,STMSIMTS,WGRBR,BALMARIN,WEBBLCK,FLWMAN,DEPMANR"/>
+        </cm-handler>
+
+        <cm-handler id="get-active-batch" class="dpi.atlas.service.cfs.handler.GetBatch">
+            <property name="description" value="Get Active Batch"/>
+            <property name="not-for" value="GIFBAL,GIFDEP,GIFBTBAL,CARDSTM,CARDBAL,,CHRTX,DCHR,DCHRA,WFPSTM,IMMCHR,ACCSTM,BALSMS,FLWUSMS,BALMARIN,WEBBLCK,FLWMAN"/>
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cfs.handler.CFSLoggerNew">
+            <property name="direction" value="incoming"/>
+            <property name="description" value="Logger In"/>
+        </cm-handler>
+
+        <cm-handler class="dpi.atlas.service.cfs.handler.InitActionCode"/>
+
+        <cm-handler class="dpi.atlas.service.cfs.handler.core.FlowIdSetter"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <property name="ValidChainText" value="FlowID"/>
+            <cm-decision>
+                <switch>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '5') "
+                                   description="Balance"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardAccountNew">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler
+                                class="branch.dpi.atlas.service.cfs.handler.core.ExtractMultiCardBalance">
+                            <property name="description"
+                                      value="Extract Multi Card Balance Limits to Build suitable Balance for ACC+Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '7') "
+                                   description="MiniStatementRequest for non-card Transactions"/>
+                        
+                        <cm-handler id="check-card" class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardAccountNew">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.core.ExtractMultiCardBalance">
+                            <property name="description"
+                                      value="Extract Multi Card Balance Limits to Build suitable Balance for ACC+Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckOperationValidity"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="description" value="Get Account Statement"/>
+                            <property name="account-description" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="statement"/>
+                            <property name="result-type" value="Tx"/>
+                            <property name="description" value="Prepare Response"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                    </case>
+                    <!-- =========================================================================-->
+                    <!-- ========================  GIFT CARD ======================== -->
+                    <!-- =========================================================================-->
+                    <case>
+                        <condition expression=" (FlowID == '80') "
+                                   description="Balance"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                            <property name="description" value="Get Gift Card Accounts"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '81') "
+                                   description="Create Card And Deposit To Gift Card Accounts"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                            <property name="description" value="Get Gift Card Accounts"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.CheckDefineGiftCard">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetBranchDepositTx">
+                            <property name="description" value="Get Gift Card Deposit Tx"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftAccCustomerID">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.DoTransaction4GiftCharge">
+                            <property name="from-account-field" value="branchCreditAcc"/>
+                            <property name="to-account-field" value="centerCreditAcc"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Create and Charge giftCards"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '82') "
+                                   description="Revoke Card And Reverse Deposit To Gift Card Accounts"/>
+
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardTx">
+                            <property name="description" value="Get Gift Card Charge Tx"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetOriginalTransaction4GiftCard"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.ReverseTransaction4GiftCard">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '83') "
+                                   description="Cancellation Gift Card Request"/>
+
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.CheckRequestNo">
+                            <property name="description" value="Check Request No for Cancellation"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                            <property name="description" value="Get Gift Card Accounts"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.DoTransaction4Cancellation">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="eConflictAcc"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Cancellation gift card Request"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '84') "
+                                   description="Update Gift Card Deposit TX"/>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                        <property name="description" value="Get Gift Card Accounts"/>
+                        <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.UpdateBatchDepositTx">
+                            <property name="description" value="Get Batch Gift Card Deposit Tx"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <!--<property name="result" value="srcAccount"/>-->
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '85') "
+                                   description="Get Gift Card Deposit TX"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                        <property name="description" value="Get Gift Card Accounts"/>
+                        <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetBatchDepositTx">
+                            <property name="description" value="Get Batch Gift Card Deposit Tx"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '86') "
+                                   description="group card Charge Transactions"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="description" value="Get Account Statement"/>
+                            <property name="account-description" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="statement"/>
+                            <property name="result-type" value="Tx"/>
+                            <property name="description" value="Prepare Response"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '87') "
+                                   description="group card DCharge! "/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGroupCardLastCharge">
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardAccountNew">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.CheckGroupCardBalance">
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.DoTransaction4DCharge">
+                            <property name="from-account-field" value="accountNo"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                          <condition expression=" (FlowID == '88') "
+                                     description="All group card DCharge! "/>
+
+                          <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGroupCardLastCharge">
+                          </cm-handler>
+
+                          <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.CheckAllCardBalance4GroupAccount">
+                          </cm-handler>
+
+                          <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.DoTransaction4DChargeAllCards">
+                              <property name="from-account-field" value="accountNo"/>
+                              <property name="amount-field" value="amount"/>
+                          </cm-handler>
+
+                          <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                              <property name="result" value="srcAccount"/>
+                              <property name="description" value="Prepare Response"/>
+                          </cm-handler>
+                      </case>
+                      
+                      <case>
+                        <condition expression=" (FlowID == '89') "
+                                   description="group card immediate Charge! "/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardAccountNew">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.CheckChildCard">
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.DoTransaction4ImmediateCharge">
+                            <property name="from-account-field" value="accountNo"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+
+                    <!-- =========================================================================-->
+                    <!-- ========================  Branch Manager ======================== -->
+                    <!-- =========================================================================-->
+                    <case>
+                        <condition expression=" (FlowID == '100') "
+                                   description="Balance"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestIsAccountBased"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '1' )"/>
+
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="srcAccount"/>
+                                            <property name="description" value="Prepare Response"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '0' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                                            <property name="description" value="Check Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                                            <property name="description" value="Check Card Account"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler
+                                                class="branch.dpi.atlas.service.cfs.handler.core.ExtractMultiCardBalance">
+                                            <property name="description"
+                                                      value="Extract Multi Card Balance Limits to Build suitable Balance for ACC+Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="srcAccount"/>
+                                            <property name="description" value="Prepare Response"/>
+                                        </cm-handler>
+
+
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '101') "
+                                   description="Branch Deposit To Card Accounts"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch Deposit to ATM Accounts"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="destAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '102') "
+                                   description="Branch CASH To Card Accounts"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="request-type"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression="(request-type == '0')"/>
+                                        <!--with control Minimum balance-->
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                                            <property name="description" value="Check Account Balance"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(request-type == '1')"/>
+                                        <!--without Minimum balance-->
+                                        <cm-handler
+                                                class="branch.dpi.atlas.service.cfs.handler.branch.CheckAccountBalance4Branch">
+                                            <property name="description" value="Check Account Balance"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch CASH to ATM Accounts"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '103') "
+                                   description="Branch Deposit Reversal To Card Accounts"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetOriginalTransaction4Branch"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ReverseBranchDepositTransaction">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '104') "
+                                   description="Branch FollowUp for Card Accounts"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.FollowUpTransactionBySequence">
+                            <property name="description" value="FollowUp Transaction for Branch Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '105') "
+                                   description="Branch Change Account Status"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.FindRequestTypeByAccountStatus"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestType"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression="(RequestType == '1')"/>
+                                        <!--Block or unblock Account-->
+                                        <cm-handler
+                                                class="branch.dpi.atlas.service.cfs.handler.branch.ChangeAccountStatus4Branch">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '2')"/>
+                                        <!--revoke account-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessRevokeAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '3')"/>
+                                        <!--revival account-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessRevivalAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '4')"/>
+                                        <!--Block Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckBlockByBlockNo">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessBlockAmount">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '5')"/>
+                                        <!--Unblock Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckUnBlockByBlockNo">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessUnBlockAmount">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '106') "
+                                   description="Branch Reset Account"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.RessetAccount">
+                            <property name="description" value="Reset Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '107') "
+                                   description="STATEMENT"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestIsAccountBased"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '1' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="description" value="Get Account Statement"/>
+                                            <property name="account-description" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="statement"/>
+                                            <property name="result-type" value="Tx"/>
+                                            <property name="description" value="Prepare Response"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '0' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                                            <property name="description" value="Check Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                                            <property name="description" value="Check Card Account"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="description" value="Get Account Statement"/>
+                                            <property name="account-description" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="statement"/>
+                                            <property name="result-type" value="Tx"/>
+                                            <property name="description" value="Prepare Response"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '2' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                                            <property name="description" value="Check Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                                            <property name="description" value="Check Card Account"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="description" value="Get Account Statement"/>
+                                            <property name="account-description" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="statement"/>
+                                            <property name="result-type" value="Tx"/>
+                                            <property name="description" value="Prepare Response"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '108') "
+                                   description="Branch Deposit for Gift Card"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckGiftDocNo">
+                            <property name="description" value="Check Gift card deposit Doc NO"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch Deposit"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="destAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '109') "
+                                   description="Branch CASH For Gift Card"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                            <property name="description" value="Get Gift Card Accounts"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch CASH "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '110') "
+                                   description="Cancellation inquiry"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CancellationInquiry">
+                            <property name="description" value="Cancellation inquiry"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '111') "
+                                   description="DisCharge gift card"/>
+
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+                        
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.cms.GetGiftCardAccounts">
+                            <property name="description" value="Get Gift Card Accounts"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+                        
+                        <cm-handler
+                                class="branch.dpi.atlas.service.cfs.handler.branch.CheckCardAccount4Revoke">
+                            <property name="description" value="Check Account Balance"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoCardRevokeTransaction">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="description" value="Do Transaction for Branch Revoke Gift Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '112') "
+                                   description="AMX Change Account Status"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.FindRequestTypeByAccountStatus"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestType"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression="(RequestType == '1')"/>
+                                        <!--inquiry  revoke -->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.InquiryRevokeAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '2')"/>
+                                        <!--conditional revoke account-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ConditionalRevokeAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '3')"/>
+                                        <!--Unconditional revoke account-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.UnConditionalRevokeAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '4')"/>
+                                        <!--revival account-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoRevivalAccount">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '113') "
+                                   description="Branch withdraw remittance"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoRemittanceFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="description" value="Do Transaction for Branch Remittance "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                   <case>
+                        <condition expression=" (FlowID == '114') "
+                                   description="Fund Transfer"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckSrcAccountGlobal">
+                            <property name="description"
+                                      value="Check the all required checkings for SrcAccount for FT"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckDestAccountGlobal">
+                            <property name="description"
+                                      value="Check the all required checkings for DestAccount for FT"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.core.DoFTTransactionBR">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '115') "
+                                   description="Transfer Reversal"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetOriginalTransaction4Branch"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.core.ReverseTransaction">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '117') "
+                                   description="sms wage transaction "/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromSMS">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for SMS wage "/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '118') "
+                                   description="Withdraw ATM "/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.checkATMExist">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch ATM "/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '119') "
+                                   description="Deposit ATM "/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.checkATMExist">
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionFromBranch">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Branch ATM "/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '120') "
+                                   description="ACCOUNT Information Simin"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckCustomerInfo">
+                            <property name="description" value="Check CustomerInfo"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '124') "
+                                   description="CBI Simin Change Status"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.FindRequestTypeByAccountStatusCBI"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestType"/>
+                            <cm-decision>
+                                <switch>
+
+                                    <case>
+                                        <condition expression="(RequestType == '1')"/>
+                                        <!--Block Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckBlockByBlockNo4CBI">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        
+                                       <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBlockWageInfo">
+                                            <property name="description" value="Get Block Wage info"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForBlockWage">
+                                            <property name="from-account-field" value="srcAccount"/>
+                                            <property name="to-account-field" value="destAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                            <property name="description" value="Do Transaction Block Wage"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessBlockAmountCBI">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '2')"/>
+                                        <!--Unblock Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckUnBlockByBlockNo4CBI">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+                                        
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBlockWageInfo">
+                                            <property name="description" value="Get Block Wage info"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForBlockWage">
+                                            <property name="from-account-field" value="srcAccount"/>
+                                            <property name="to-account-field" value="destAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                            <property name="description" value="Do Transaction Block Wage"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessUnBlockAmountCBI">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '125') "
+                                   description="Simin Change Account Status"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.FindRequestTypeByAccountStatus"/>
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestType"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression="(RequestType == '1')"/>
+                                        <!--Block or unblock Account-->
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBlockWageInfo">
+                                            <property name="description" value="Get Block Wage info"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForBlockWage">
+                                            <property name="from-account-field" value="srcAccount"/>
+                                            <property name="to-account-field" value="destAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                            <property name="description" value="Do Transaction Block Wage"/>
+                                        </cm-handler>
+
+
+                                        <cm-handler
+                                                class="branch.dpi.atlas.service.cfs.handler.branch.ChangeAccountStatus4Branch">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '4')"/>
+                                        <!--Block Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckBlockByBlockNo">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBlockWageInfo">
+                                            <property name="description" value="Get Block Wage info"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForBlockWage">
+                                            <property name="from-account-field" value="srcAccount"/>
+                                            <property name="to-account-field" value="destAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                            <property name="description" value="Do Transaction Block Wage"/>
+                                        </cm-handler>
+
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessBlockAmount">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '5')"/>
+                                        <!--Unblock Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckUnBlockByBlockNo">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBlockWageInfo">
+                                            <property name="description" value="Get Block Wage info"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForBlockWage">
+                                            <property name="from-account-field" value="srcAccount"/>
+                                            <property name="to-account-field" value="destAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                            <property name="description" value="Do Transaction Block Wage"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessUnBlockAmount">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression="(RequestType == '6')"/>
+                                        <!--Financial Block Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckBlockByBlockNo4Financial">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessBlockAmount4Financial">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                    </case>
+
+                                    <case>
+                                        <condition expression="(RequestType == '7')"/>
+                                        <!--Unblock Amount-->
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CheckUnBlockByBlockNo4Financial">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ProcessUnBlockAmount4Financial">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="amount-field" value="amount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" (FlowID == '128') "
+                                   description="Branch Get Wage"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.CalculateWageAmount">
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetBranchAccount">
+                            <property name="description" value="Get Branch Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.DoTransactionForWage">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Get Wage"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '129') "
+                                   description="Branch Deposit Reversal To Card Accounts"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetOriginalTransaction4Branch"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.SetReversTxCode">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.GetDescription">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.ReverseBranchDepositTransaction">
+                            <property name="description" value="Reverse Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+
+                    </case>
+                    
+                    <!-- =========================================================================-->
+                    <!-- ========================  TOURIST CARD ======================== -->
+                    <!-- =========================================================================-->
+
+                    <case>
+                        <condition expression=" (FlowID == '130') "
+                                   description="Tourist Balance"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestIsAccountBased"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '1' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="srcAccount"/>
+                                            <property name="description" value="Prepare Response"/>
+                                        </cm-handler>
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '0' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                                            <property name="description" value="Check Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                                            <property name="description" value="Check Card Account"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler
+                                                class="branch.dpi.atlas.service.cfs.handler.core.ExtractMultiCardBalance">
+                                            <property name="description"
+                                                      value="Extract Multi Card Balance Limits to Build suitable Balance for ACC+Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="srcAccount"/>
+                                            <property name="description" value="Prepare Response"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '131') "
+                                   description="Charge Tourist Card"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.CheckDefineTouristCard">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.DoTransaction4TouristCard">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Charge Tourist Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '132') "
+                                   description="DisCharge Tourist Card"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.CheckDefineTouristCard">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.DoTransaction4TouristCard">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for DisCharge Tourist Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '133') "
+                                   description="Revoke Tourist Card"/>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.CheckDefineTouristCard">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.DoTransaction4TouristCard">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for Revoke Tourist Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" (FlowID == '134') "
+                                   description="Card STATEMENT for Tourist"/>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+                            <property name="ValidChainText" value="RequestIsAccountBased"/>
+                            <cm-decision>
+                                <switch>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '1' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="description" value="Get Account Statement"/>
+                                            <property name="account-description" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="statement"/>
+                                            <property name="result-type" value="Tx"/>
+                                            <property name="description" value="Prepare Response"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                    </case>
+                                    <case>
+                                        <condition expression=" ( RequestIsAccountBased == '0' )"/>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                                            <property name="description" value="Check Card"/>
+                                        </cm-handler>
+                                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                                            <property name="description" value="Check Card Account"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                                            <property name="description" value="Check Account"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                                            <property name="account-field" value="srcAccount"/>
+                                            <property name="description" value="Get Account Statement"/>
+                                            <property name="account-description" value="srcAccount"/>
+                                        </cm-handler>
+                                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                                            <property name="result" value="statement"/>
+                                            <property name="result-type" value="Tx"/>
+                                            <property name="description" value="Prepare Response"/>
+                                            <property name="account-field" value="srcAccount"/>
+                                        </cm-handler>
+                                    </case>
+                                </switch>
+                            </cm-decision>
+                        </cm-handler>
+                    </case>
+
+                    <case>
+                        <condition expression=" (FlowID == '135') "
+                                   description="Charge STATEMENT for Tourist"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckCardNew">
+                            <property name="description" value="Check Card"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.getCardAccount">
+                            <property name="description" value="Check Card Account"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.GetCustomerStatement">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="description" value="Get Account Statement"/>
+                            <property name="account-description" value="srcAccount"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="statement"/>
+                            <property name="result-type" value="Tx"/>
+                            <property name="description" value="Prepare Response"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+                    </case>
+                   
+                    <case>
+                        <condition expression=" (FlowID == '136') "
+                                   description="Fund Transfer Tourist Card"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="srcAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetAccountLimits">
+                            <property name="account-field" value="srcAccount"/>
+
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountBalance">
+                            <property name="description" value="Check Account Balance"/>
+                            <property name="amount-field" value="amount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountNew">
+                            <property name="description" value="Check Account"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckAccountStatus">
+                            <property name="description" value="Check Account Status"/>
+                            <property name="account-field" value="destAccount"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.tourist.DoTransaction4TouristCard">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction for fund transfer Tourist Card"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+
+
+                            <property name="description" value="Prepare Response"/>
+
+                        </cm-handler>
+                    </case>
+                    
+					
+					 <!-- =========================================================================-->
+                    <!-- ========================  Manzume ======================== -->
+                    <!-- =========================================================================-->
+                    <case>
+                        <condition expression=" (FlowID == '140') "
+                                   description="Fund Transfer 4 manzume"/>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.CheckDestAccountGlobal">
+                            <property name="description"
+                                      value="Check the all required checkings for DestAccount for FT"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.GetSGBTxCode">
+                            <property name="description" value="Get SGB Transaction Code"/>
+                        </cm-handler>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.core.DoFTTransactionManzume">
+                            <property name="from-account-field" value="srcAccount"/>
+                            <property name="to-account-field" value="destAccount"/>
+                            <property name="amount-field" value="amount"/>
+                            <property name="description" value="Do Transaction"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="result" value="srcAccount"/>
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+
+
+                    <!-- =========================================================================-->
+                    <!-- ========================  Default ======================== -->
+                    <!-- =========================================================================-->
+
+                    <case>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.core.SetActionCode">
+                            <property name="action-code" value="1805"/>
+                            <property name="description"
+                                      value="Set Action Code to 1805 (UNSUPPORTED_MESSAGE) for Unknown Transaction"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.PrepareResponseForCM">
+                            <property name="description" value="Prepare Response"/>
+                        </cm-handler>
+                    </case>
+
+                </switch>
+            </cm-decision>
+        </cm-handler>
+
+        <cm-handler id="logger-out" class="dpi.atlas.service.cfs.handler.CFSLoggerNew">
+            <property name="direction" value="outgoing"/>
+            <property name="description" value="Logger Out"/>
+        </cm-handler>
+
+
+        <cm-handler class="dpi.atlas.service.cm.handler.general.SendTextResponse">
+            <property name="connector" value="cfs-jms-connector"/>
+        </cm-handler>
+
+
+        <fault-handler name="fault.external.cfs.financial"
+                       class="dpi.atlas.service.cfs.handler.fault.FinancialFaultHandler">
+            <property name="connector" value="cfs-jms-connector"/>
+        </fault-handler>
+
+        <!--<fault-handler name="fault.external.cfs.other" class="dpi.atlas.service.cfs.handler.fault.OtherFaultHandler">-->
+        <fault-handler name="fault.external.cfs.other"
+                       class="dpi.atlas.service.cfs.handler.fault.FinancialFaultHandler">
+            <property name="connector" value="cfs-jms-connector"/>
+        </fault-handler>
+
+        <!--<fault-handler name="fault.external.cfs.logfault" class="dpi.atlas.service.cfs.handler.fault.LogFaultHandler"/>-->
+
+        <!--<fault-handler name="fault.external" class="dpi.atlas.service.cm.handler.general.ExternalFaultHandler">-->
+        <fault-handler name="fault.external" class="dpi.atlas.service.cfs.handler.fault.FinancialFaultHandler">
+            <property name="connector" value="cfs-jms-connector"/>
+        </fault-handler>
+
+        <!--<fault-handler name="fault.internal" class="dpi.atlas.service.cm.handler.general.InternalFaultHandler">-->
+        <fault-handler name="fault.internal" class="dpi.atlas.service.cfs.handler.fault.FinancialFaultHandler">
+            <!--<property name="connector" value="dummy-connector"/>-->
+            <property name="connector" value="cfs-jms-connector"/>
+            <property name="external-connector" value="cfs-jms-connector"/>
+        </fault-handler>
+
+        <!-- Start SMS Notification -->
+
+        <cm-handler class="dpi.atlas.service.cfs.handler.NotificationFlowIdSetter"/>
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <property name="ValidChainText" value="flw"/>
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( flw == '1' )"/>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseSPW">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="10000"/>
+                            <property name="notChecked"
+                                      value="BAL,SIBAL,PGBAL,POSNBAL,PGNBAL,SINBAL,NBALA,POSNBALA,5STM,FTGRP,FTGRPR,NFTGRP,NFTGRPPS,NFTGRPPB,NFTGRPPG,NFTGRPMP,FTGRPPB,NFTGRPR,NFTGRPRPS,NFTGRPRPB,NFTGRPRPG,NFTGRPRMP,FTGRPRPB"/>
+                            <property name="description" value="SMS Prepare Response SPW"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="destAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( flw == '2' )"/>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseNASIM">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="0"/>    
+                            <property name="serviceType" value="NSIM"/>
+                            <property name="notChecked"
+                                      value="BALBRNCH,FLWBRNCH,BRCHNGST,RSACCBRNCH,STMBRNCH,SMBAL,GIFCANBR,GIFDCHBR,BLNCTRST,CDSTTRST,CHSTTRST,FLWUTRST,SMCHNGST,BALCRDTS,STMCRDTS,FLWCRDTS,CSHREMBR,FLWSAFEBX,BALSMS,FLWUSMS,SMCHNGCB,BALMARIN,FLWMARIN,FLWMAN"/>
+                            <property name="Checked"   value="DEPBRNCH"/>
+                            <property name="OperationCode"   value="189"/>
+                            <property name="description" value="SMS Prepare Response NASIM"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( flw == '3'  )"/>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseBRANCH">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="0"/>    
+                            <property name="description" value="SMS Prepare Response BRANCH"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( flw == '5' )"/>
+                        <!--Ebanking Flow-->
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseEBNK">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="10000"/>
+                            <property name="notChecked"
+                                      value="STM,BAL,FLW,BLCKSTK,UNBLCKSTK,BLCK,SHRBLK,SHREDT,SHRUBLK,SHWACCST,UNBLCK,SHRSTLS,SHRST,RTGSST,RTGSFLW,REPUBLK,REPBLK,REPACCST,REG,CRRT,CQST,CQRV,CQRG,CQLS,BLPYV,ACIF"/>
+                            <property name="description" value="SMS Prepare Response EBNK"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="destAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+                    <case>
+                        <condition expression=" ( flw == '7' )"/>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseGroupCard">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="0"/>
+                            <property name="description" value="SMS Prepare Response charge GroupCard"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+                    
+                    <case>
+                        <condition expression=" ( flw == '8' )"/>
+                        <cm-handler class="dpi.atlas.service.cfs.handler.SMSPrepareResponseSIMIN">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="smsMinimumWithdrawAmount" value="0"/>
+                            <property name="serviceType" value="SMIN"/>
+                            <property name="description" value="SMS Prepare Response SIMIN"/>
+                        </cm-handler>
+
+                        <cm-handler class="dpi.atlas.service.cm.handler.general.SMSSendTextResponse">
+                            <property name="account-field" value="srcAccount"/>
+                            <property name="connector" value="cfs-sms-connector"/>
+                        </cm-handler>
+                    </case>
+
+                </switch>
+            </cm-decision>
+        </cm-handler>
+        <fault-handler name="fault.external.cfs.SMSNotification"
+                       class="dpi.atlas.service.cfs.handler.fault.SMSFaultHandler">
+        </fault-handler>
+
+        <!-- End SMS Notification  -->
+        
+        <!-- Start Remittance Notification -->
+
+        <cm-handler class="dpi.atlas.service.cm.handler.CMDecisionChain">
+            <property name="ValidChainText" value="flw"/>
+            <cm-decision>
+                <switch>
+                    <case>
+                        <condition expression=" ( flw == '2' )"/>
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.RemittancePrepareResponse">
+                            <property name="actioncodeToBeConsidered" value="0000"/>
+                            <property name="Checked"   value="CSHREMBR"/>
+                            <property name="description" value="Remittance Prepare Response"/>
+                        </cm-handler>
+
+                        <cm-handler class="branch.dpi.atlas.service.cfs.handler.branch.RemittanceSendTextResponse">
+                            <property name="connector" value="cfs-remittance-connector"/>
+                        </cm-handler>
+                    </case>
+                </switch>
+            </cm-decision>
+        </cm-handler>
+        <fault-handler name="fault.external.cfs.remittanceNotification"
+                       class="branch.dpi.atlas.service.cfs.handler.branch.RemittanceFaultHandler">
+        </fault-handler>
+
+        <!-- End Remittance Notification  -->
+
+    </cm-source>
+
+    <connectors>
+        <connector name="dummy-connector" class="dpi.atlas.service.cm.connector.DummyConnector"/>
+
+        <connector name="cfs-jms-connector"
+                   class="dpi.atlas.service.cm.connector.jms.ResponseMQConnector">
+            <property name="queue-manager" value="CSQ1"/>
+            <property name="queue-manager-hostname" value="127.0.0.1"/>
+            <property name="queue-manager-port" value="1414"/>
+            <property name="send-queue" value="CFS2CM_ONLINE"/>
+            <property name="priority" value="9"/>
+            <property name="timeout" value="6000"/>
+            <property name="pool-size" value="200"/>
+        </connector>
+
+        <!-- Connector for SMS Notification -->
+        <connector name="cfs-sms-connector"
+                   class="dpi.atlas.service.cm.connector.jms.ResponseMQConnector">
+            <property name="queue-manager" value="CSQ1"/>
+            <property name="queue-manager-hostname" value="127.0.0.1"/>
+            <property name="queue-manager-port" value="1414"/>
+            <property name="send-queue" value="CFS2SMS_ONLINE"/>
+            <property name="priority" value="9"/>
+            <property name="timeout" value="10000"/>
+            <property name="pool-size" value="80"/>
+            <property name="time-to-live" value="10000"/>
+
+        </connector>
+        <!-- End Connector -->
+        
+        <!-- Connector for remittance Notification -->
+        <connector name="cfs-remittance-connector"
+                   class="dpi.atlas.service.cm.connector.jms.ResponseMQConnector">
+            <property name="queue-manager" value="CSQ1"/>
+            <property name="queue-manager-hostname" value="127.0.0.1"/>
+            <property name="queue-manager-port" value="1414"/>
+            <property name="send-queue" value="CM2RB_L"/>
+            <property name="priority" value="9"/>
+            <property name="timeout" value="10000"/>
+            <property name="pool-size" value="80"/>
+            <property name="time-to-live" value="10000"/>
+
+        </connector>
+        <!-- End Connector -->
+
+        <connector name="cfs-http-connector" class="dpi.atlas.service.cm.connector.http.HTTPLoopBackConnector"/>
+
+    </connectors>
+
+</cm-service>

@@ -1,0 +1,371 @@
+<!-- Definitions for dpi.atlas.ojb.log.Sequencer -->
+<class-descriptor
+    class="dpi.atlas.model.entity.log.Sequence"
+    table="TBSequence"
+    >
+    <field-descriptor
+        name="name"
+        column="name"
+        jdbc-type="VARCHAR"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="sequencer"
+        column="sequencer"
+        jdbc-type="BIGINT"
+        />
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.log.MessageLog -->
+<class-descriptor
+    class="dpi.atlas.model.entity.log.OfflineMsg"
+    table="TBOfflineMsg"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="sequencer"
+        jdbc-type="BIGINT"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="MTI"
+        column="MTI"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="dateLocal"
+        column="Date_Local"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="PAN"
+        column="PAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="STAN"
+        column="STAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="RRN"
+        column="RRN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="tryCount"
+        column="TryCount"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="lastTryDate"
+        column="LastTryDate"
+        jdbc-type="TIMESTAMP"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.log.MessageLog -->
+<class-descriptor
+    class="dpi.atlas.model.entity.log.UndeliveredMsg"
+    table="TBUndeliveredMsg"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="sequencer"
+        jdbc-type="BIGINT"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="MTI"
+        column="MTI"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="dateLocal"
+        column="Date_Local"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="PAN"
+        column="PAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="STAN"
+        column="STAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="RRN"
+        column="RRN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="tryCount"
+        column="TryCount"
+        jdbc-type="INTEGER"
+        />
+    <field-descriptor
+        name="lastTryDate"
+        column="LastTryDate"
+        jdbc-type="TIMESTAMP"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<!-- Definitions for dpi.atlas.model.entity.log.MessageLog -->
+<class-descriptor
+    class="dpi.atlas.model.entity.log.OfflineAcqMsg"
+    table="TBOfflineAcqMsg"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="sequencer"
+        jdbc-type="BIGINT"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="MTI"
+        column="MTI"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="dateLocal"
+        column="Date_Local"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="PAN"
+        column="PAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="STAN"
+        column="STAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="RRN"
+        column="RRN"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+<!-- Definitions for dpi.atlas.model.entity.log.MessageLog -->
+<class-descriptor
+    class="dpi.atlas.model.entity.log.BlockedTransaction"
+    table="TBBlockedTransactions"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="sequencer"
+        jdbc-type="BIGINT"
+        primarykey="true"
+        autoincrement="false"
+        />
+    <field-descriptor
+        name="MTI"
+        column="MTI"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="dateLocal"
+        column="Date_Local"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="PAN"
+        column="PAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="STAN"
+        column="STAN"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="RRN"
+        column="RRN"
+        jdbc-type="VARCHAR"
+        />
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+
+
+<class-descriptor
+    class="dpi.atlas.model.entity.log.MessageLog"
+    table="tbMessageLog"
+    >
+    <field-descriptor
+        name="sequencer"
+        column="Sequencer"
+        jdbc-type="BIGINT"
+        primarykey="true"
+        />
+    <field-descriptor
+        name="ISOField0"
+        column="ISOField0"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField2"
+        column="ISOField2"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField3"
+        column="ISOField3"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField4"
+        column="ISOField4"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField7"
+        column="ISOField7"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField11"
+        column="ISOField11"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField12"
+        column="ISOField12"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField24"
+        column="ISOField24"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField25"
+        column="ISOField25"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField32"
+        column="ISOField32"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField33"
+        column="ISOField33"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField37"
+        column="ISOField37"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField39"
+        column="ISOField39"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField41"
+        column="ISOField41"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField49"
+        column="ISOField49"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="ISOField100"
+        column="ISOField100"
+        jdbc-type="VARCHAR"
+        />
+
+    <field-descriptor
+        name="batchNo"
+        column="BatchNo"
+        jdbc-type="BIGINT"
+        />
+
+    <field-descriptor
+        name="reconciliationFlag"
+        column="ReconciliationFlag"
+        jdbc-type="INTEGER"
+        />
+
+    <field-descriptor
+        name="sessionID"
+        column="SessionID"
+        jdbc-type="VARCHAR"
+        />
+
+    <field-descriptor
+        name="refNo"
+        column="RefNo"
+        jdbc-type="VARCHAR"
+        />
+
+    <field-descriptor
+        name="packager"
+        column="Packager"
+        jdbc-type="VARCHAR"
+        />
+
+    <field-descriptor
+        name="msgDump"
+        column="MsgDump"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="termType"
+        column="Term_Type"
+        jdbc-type="VARCHAR"
+        />
+    <field-descriptor
+        name="isReversed"
+        column="Is_Reversed"
+        jdbc-type="INTEGER"
+        />
+
+    <field-descriptor
+        name="respCode"
+        column="Resp_Code"
+        jdbc-type="VARCHAR"
+        />
+
+
+    <attribute
+        attribute-name="cacheable"
+        attribute-value="false"
+        />
+</class-descriptor>
+<!--    -->
+

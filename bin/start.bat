@@ -1,0 +1,1 @@
+C:\j2sdk1.4.2_06\bin\java -classpath D:\atlas\atlas-tejarat-all\config;D:\atlas\atlas-tejarat-all\conf;D:\atlas\atlas-tejarat-all\config\ojb; QSPServer ../config/server-tj-cm-activemq.xml

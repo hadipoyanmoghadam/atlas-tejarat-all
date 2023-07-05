@@ -1,0 +1,33 @@
+<aspectj>
+
+  <aspects>
+
+    <concrete-aspect name="DPITraceAspect"
+                     extends="com.jinspired.jxinsight.trace.ext.aspectj.TraceAspect">
+      <pointcut name="scope" expression="execution(public * dpi..*.*(..))"/>
+    </concrete-aspect>
+
+    <concrete-aspect name="HibernateTraceAspect"
+                     extends="com.jinspired.jxinsight.trace.ext.aspectj.TraceAspect">
+      <pointcut name="scope" expression="execution(public * net.sf.hibernate..*.*(..))"/>
+    </concrete-aspect>
+
+    <concrete-aspect name="HitTraceAspect"
+                     extends="com.jinspired.jxinsight.trace.ext.aspectj.TraceAspect">
+      <pointcut name="scope" expression="execution(public * hit..*.*(..))"/>
+    </concrete-aspect>
+
+
+<!--
+    <concrete-aspect name="$aj.PrecedenceTraceAspect"
+                     precedence="
+                     DPITraceAspect
+                     "/>
+
+-->
+  </aspects>
+
+    <weaver options="-verbose">
+                  </weaver>
+
+</aspectj>
